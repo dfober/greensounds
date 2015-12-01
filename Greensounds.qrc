@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+		<file>qml/error.qml</file>
+		<file>qml/wait.qml</file>
+		<file>qml/SensorUI.qml</file>
+		<file>qml/SensorsList.qml</file>
+		<file>qml/User.qml</file>
+		<file>qml/Param.qml</file>
+		<file>qml/USlider.qml</file>
+		<file>qml/GreenSounds.qml</file>
+    </qresource>
+</RCC>

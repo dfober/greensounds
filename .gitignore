@@ -1,0 +1,9 @@
+Info.plist
+greensounds.xcodeproj
+build
+.qmake.stash
+tmpSrc
+Debug
+Greensounds.pro.user
+greensounds.build
+libGreensounds.so
