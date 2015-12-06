@@ -99,6 +99,7 @@ class Sensors : public QObject
 	unsigned long	fIPNum;
 	OSCListener		fListener;
 	bool			fConnected;
+	bool			fSkipError;
 
 	void initSensors ();
 	void destchge ();
@@ -113,6 +114,7 @@ class Sensors : public QObject
 		Q_INVOKABLE void param(int num, bool state);
 		Q_INVOKABLE void slider(int num, float value);
 		Q_INVOKABLE void pmode(bool state);
+		Q_INVOKABLE void skipError()		{ fSkipError = true; }
 
 				 Sensors();
 		virtual ~Sensors();
@@ -126,6 +128,7 @@ class Sensors : public QObject
 		void hello() const;
 		void connect(const char* dst);
 		bool connected() const				{ return fConnected; }
+		bool skip() const					{ return fSkipError; }
 		void skipChge(int state);
 		void start(QObject * o);
 

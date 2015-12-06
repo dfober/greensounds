@@ -45,8 +45,8 @@ const char* kModeAddr		= "/mode";
 const char*	kParamBaseAddr	= "/param/";
 const char* kSliderBaseAddr	= "/slider/";
 
-const float kVersion = 0.5;
-const char* kVersionStr = "0.5";
+const float kVersion = 0.51;
+const char* kVersionStr = "0.51";
 
 //------------------------------------------------------------------------
 OSCListener::OSCListener(Sensors* sensors, int port)
@@ -124,7 +124,9 @@ void Sensors::initSensors()
 }
 
 //------------------------------------------------------------------------
-Sensors::Sensors() : fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), fListener(this, LISTENING_PORT), fConnected(false), fTimerID(0)
+Sensors::Sensors()
+	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), fListener(this, LISTENING_PORT),
+	fConnected(false), fSkipError(false), fTimerID(0)
 {
 	initSensors();
 	fDestination = DEFAULT_ADDRESS;

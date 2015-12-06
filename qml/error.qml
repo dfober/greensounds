@@ -25,11 +25,18 @@ Check your network connection!" ;
 		color: "red"
 		font.pointSize: 18
 	}
-	Button {
+	Row {
     	anchors.bottom: parent.bottom
     	anchors.bottomMargin: 20
         anchors.horizontalCenter : parent.horizontalCenter
-	 	text: "Quit"
-		onClicked: Qt.quit()
+		spacing: 20 * pixelRatio()
+		Button {
+		 	text: "Quit"
+			onClicked: Qt.quit()
+		}
+		Button {
+		 	text: "Continue"
+			onClicked: sensors.skipError();
+		}
 	}
 }

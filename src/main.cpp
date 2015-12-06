@@ -31,6 +31,7 @@ class SensorAppl : public QApplication
 		virtual ~SensorAppl() {}
 	
 		void start();
+		void greensound();
 	
 	protected:
         void timerEvent(QTimerEvent * e);
@@ -45,21 +46,31 @@ void SensorAppl::start()
     fTimerID = startTimer(1000);
 }
 
+void SensorAppl::greensound()
+{
+	fView.setSource(QUrl("qrc:/qml/GreenSounds.qml"));
+	fView.rootContext()->setContextProperty("sensors", &fSensors);
+	fSensors.start((QObject*)fView.rootObject());
+}
+
 void SensorAppl::timerEvent(QTimerEvent*)
 {
 	static int ntry = 1;
-	if (fSensors.connected()) {
-		if (fSensors.network())
-			fView.setSource(QUrl("qrc:/qml/GreenSounds.qml"));
+	if (fSensors.connected() ) {
+		if (fSensors.network()) {
+			greensound();
+			killTimer(fTimerID);
+		}
 		else
 			fView.setSource(QUrl("qrc:/qml/error.qml"));
-		killTimer(fTimerID);
-		fView.rootContext()->setContextProperty("sensors", &fSensors);
-		fSensors.start((QObject*)fView.rootObject());
 	}
 	else if (ntry < 5) {
 		fSensors.hello();
 		ntry++;
+	}
+	else if (fSensors.skip()) {
+			greensound();
+			killTimer(fTimerID);
 	}
 	else fView.setSource(QUrl("qrc:/qml/error.qml"));
 }

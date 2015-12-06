@@ -47,6 +47,9 @@ Messages de contrôle
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.51
+- la page d'erreur permet de continuer
+
 version 0.5
 - version initiale conçue pour test
   aucune calibration des données n'est effectuée dans cette version
