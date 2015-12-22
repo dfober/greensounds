@@ -1,5 +1,6 @@
 Info.plist
 greensounds.xcodeproj
+*.pbxproj
 build
 .qmake.stash
 tmpSrc
