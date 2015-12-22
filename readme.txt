@@ -44,9 +44,31 @@ Messages de contrôle
 /greensounds version v			: numéro de version de l'application
 								  le message est envoyé en réponse au message '/greensound version'
 
+/greensound ip wait				: message envoyé toutes les secondes par un client qui vient de se connecter 
+								  ou qui a reçu un message wait
+/greensound ip play				: message envoyé toutes les secondes par un client qui a reçu un message play
+/greensound ip bye				: message envoyé lorsqu'un client quitte
+
+------------------------------------
+Messages émis depuis max
+------------------------------------
+/greensound play
+/greensound wait
+/greensound quit				: force l'application cliente à quitter
+
+------------------------------------
+ todo
+------------------------------------
+- voir pb de broadcast
+
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.52
+- implémentation du protocole 'wait' 'play' avec un intervalle de 1s.
+- support du message 'quit'
+- emission du message 'bye' en sortie de l'application
+
 version 0.51
 - la page d'erreur permet de continuer
 
