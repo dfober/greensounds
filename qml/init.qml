@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
-import QtGraphicalEffects 1.0
 
 Rectangle {
     width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight;
@@ -23,7 +22,7 @@ Rectangle {
 		gradient: Gradient {
 			GradientStop { position: 0.0; color: "lightblue" }
 			GradientStop { position: 0.2; color: "blue" }
-			GradientStop { position: 0.5; color: "red" }
+			GradientStop { position: 0.5; color: "orange" }
 			GradientStop { position: 0.8; color: "blue" }
 			GradientStop { position: 1.0; color: "lightblue" }
 		}
@@ -31,15 +30,14 @@ Rectangle {
      }
      
 	Text { 
-		text: "...wait..." ; 
+		text: "Wait while loading" ; 
 		anchors.centerIn: parent
 		color: "lightgrey"
-		font.weight: Font.Bold
-		font.pointSize: 24
+		font.pointSize: 16
 	}
 
     Timer {
-        interval: 30; running: true; repeat: true;
+        interval: 6; running: true; repeat: true;
         onTriggered: timeChanged()
     }
 }

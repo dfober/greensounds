@@ -63,8 +63,6 @@ Rectangle {
         anchors.topMargin: 20 * pixelRatio()
 		x : 40 * pixelRatio()
 		y: 40 * pixelRatio()
-//  		x : header.x
-//        anchors.top: header.bottom
         width: parent.width*2/3
         height: parent.height
         model: SensorsList {}
