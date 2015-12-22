@@ -47,34 +47,16 @@
 #include "ip/UdpSocket.h"
 
 #include "Sensor.h"
+#include "Tools.h"
 
 
 
 #define OUTPUT_BUFFER_SIZE 1024
+#define LISTENING_PORT 8000
+
 
 class QQuickView;
 class Sensors;
-//------------------------------------------------------------------------
-class OSCListener : public osc::OscPacketListener, public QThread
-{
-	UdpListeningReceiveSocket fSocket;	///< the udp socket listener
-	Sensors *	fSensors;
-	bool		fRunning;
-
-	public:
-
-				 OSCListener(Sensors* sensors, int port = 8000);
-		virtual ~OSCListener();
-
-		/*!
-			\brief process OSC messages
-
-			\param m the OSC message (pre-processed by the base class)
-			\param remoteEndpoint the sender IP address
-		*/
-		virtual void ProcessMessage( const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint );
-		virtual void run();
-};
 
 //------------------------------------------------------------------------
 class OSCStream : public osc::OutboundPacketStream
@@ -97,7 +79,7 @@ class Sensors : public QObject
 	QObject*		fUIRoot;
 	IpEndpointName	fDestPoint;
 	unsigned long	fIPNum;
-	OSCListener		fListener;
+	std::string		fIPStr;
 	bool			fConnected;
 	bool			fSkipError;
 
@@ -122,7 +104,8 @@ class Sensors : public QObject
 		int		port () const				{ return fPort; }
 		QString destination () const		{ return fDestination; }
 		bool	network() const				{ return fSocket != 0; }
-		unsigned long ip() const;
+		unsigned long	ip() const;
+		const char*		ipstr() const		{ return fIPStr.c_str(); }
 		unsigned long broadcastAddress() const;
 
 		void hello() const;

@@ -11,70 +11,7 @@
 
 */
 
-
-#include <QApplication>
-#include <QQuickView>
-#include <QQmlContext>
-#include <QObject>
-#include <QDebug>
-
-
-#include "Sensors.h"
-
-class SensorAppl : public QApplication
-{
-	QQuickView	fView;
-	int			fTimerID;
-	Sensors		fSensors;
-	public:
-				 SensorAppl(int& argc, char** argv) : QApplication(argc, argv) {}
-		virtual ~SensorAppl() {}
-	
-		void start();
-		void greensound();
-	
-	protected:
-        void timerEvent(QTimerEvent * e);
-};
-
-void SensorAppl::start()
-{
-    fView.setSource(QUrl("qrc:/qml/wait.qml"));
-    fView.rootContext()->setContextProperty("sensors", &fSensors);
-    fView.show();
-	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
-    fTimerID = startTimer(1000);
-}
-
-void SensorAppl::greensound()
-{
-	fView.setSource(QUrl("qrc:/qml/GreenSounds.qml"));
-	fView.rootContext()->setContextProperty("sensors", &fSensors);
-	fSensors.start((QObject*)fView.rootObject());
-}
-
-void SensorAppl::timerEvent(QTimerEvent*)
-{
-	static int ntry = 1;
-	if (fSensors.connected() ) {
-		if (fSensors.network()) {
-			greensound();
-			killTimer(fTimerID);
-		}
-		else
-			fView.setSource(QUrl("qrc:/qml/error.qml"));
-	}
-	else if (ntry < 5) {
-		fSensors.hello();
-		ntry++;
-	}
-	else if (fSensors.skip()) {
-			greensound();
-			killTimer(fTimerID);
-	}
-	else fView.setSource(QUrl("qrc:/qml/error.qml"));
-}
-
+#include "SensorAppl.h"
 
 int main(int argc, char* argv[])
 {

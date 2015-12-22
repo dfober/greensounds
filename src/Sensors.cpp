@@ -38,63 +38,12 @@ using namespace osc;
 #define DEFAULT_ADDRESS "192.168.1.21"
 //#define DEFAULT_ADDRESS "192.168.43.88"
 #define DEFAULT_PORT 7001
-#define LISTENING_PORT 8000
 
 const char* kGreensoundsAddr= "/greensounds";
 const char* kModeAddr		= "/mode";
 const char*	kParamBaseAddr	= "/param/";
 const char* kSliderBaseAddr	= "/slider/";
 
-const float kVersion = 0.51;
-const char* kVersionStr = "0.51";
-
-//------------------------------------------------------------------------
-OSCListener::OSCListener(Sensors* sensors, int port)
-	: fSocket(IpEndpointName( IpEndpointName::ANY_ADDRESS, port ), this), fSensors(sensors), fRunning(false) {}
-
-OSCListener::~OSCListener()	{ fSocket.AsynchronousBreak(); }
-
-//------------------------------------------------------------------------
-void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpointName& src )
-{
-	string address(m.AddressPattern());
-	
-    if (address == kGreensoundsAddr) {
-        ReceivedMessageArgumentIterator i = m.ArgumentsBegin();
-		while (i != m.ArgumentsEnd()) {
-			if (i->IsString()) {
-				string msg(i->AsStringUnchecked());
-				if (msg == "hello") {
-					char buff[120];
-					src.AddressAsString(buff);
-					fSensors->connect(buff);
-				}
-				else if (msg == "version") {
-					fSensors->send (kGreensoundsAddr, "version", kVersion);
-				}
-				
-			}
-			else if (i->IsInt32()) {
-			}
-			else if (i->IsFloat()) {
-			}
-			i++;
-		}
-	}
-}
-
-//------------------------------------------------------------------------
-void OSCListener::run()
-{
-	fRunning = true;
-	try {
-		fSocket.Run(); 
-	}
-	catch (osc::Exception e) {
-		cerr << "osc error: " << e.what() << endl;
-	}
-	fRunning = false;
-}
 
 //------------------------------------------------------------------------
 void Sensors::timerEvent(QTimerEvent * )
@@ -125,7 +74,7 @@ void Sensors::initSensors()
 
 //------------------------------------------------------------------------
 Sensors::Sensors()
-	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), fListener(this, LISTENING_PORT),
+	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), //fListener(this, LISTENING_PORT),
 	fConnected(false), fSkipError(false), fTimerID(0)
 {
 	initSensors();
@@ -137,7 +86,7 @@ Sensors::Sensors()
 		if (fSocket) fSocket->allowBroadcast();
 		fTimerID = startTimer(10);
 		fIPNum = Tools::getIP();
-		fListener.start();
+		fIPStr = Tools::ip2string(fIPNum);
 	}
 	catch(std::exception e) {
 		fSocket = 0;
@@ -147,13 +96,6 @@ Sensors::Sensors()
 //------------------------------------------------------------------------
 Sensors::~Sensors()
 {
-//	QSettings settings;
-
-//qDebug() << "Sensors::~Sensors save port to " << port();
-//    settings.setValue("port", port());
-//    settings.setValue("dest", destination());
-
-	fListener.terminate();
 	killTimer(fTimerID);
  	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
 		delete fSensors[i];
@@ -197,15 +139,6 @@ void Sensors::hello() const
 void Sensors::start(QObject* o)
 {
 	fUIRoot = o;
-
-//	QSettings settings;
-//	port(settings.value("port", DEFAULT_PORT).toString());
-//	destination (settings.value("dest", DEFAULT_ADDRESS).toString());
-//	if (fUIRoot) {
-//qDebug() << "Sensors::start set port to " << port();
-//		fUIRoot->setProperty("port", port());
-//		fUIRoot->setProperty("address", destination());
-//	}
 }
 
 //------------------------------------------------------------------------

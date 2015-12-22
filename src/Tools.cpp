@@ -33,8 +33,10 @@ unsigned long Tools::getIP()
 	QList<QHostAddress>	hl = ni.allAddresses();
 	for (int i=0; i < hl.size(); i++) {
 		unsigned long ip = hl[i].toIPv4Address();
-		if (ip && ((ip & 0xFF000000) != 0x7F000000)) {
-			return ip;
+		if (ip) {
+			unsigned long classe = ip >> 24;
+			if ((classe >= 192) && (classe <= 223))		// look for a classe C network
+				return ip;
 		}
 	}
 	return 0x7F000001;
