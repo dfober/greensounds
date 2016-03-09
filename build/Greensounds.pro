@@ -1,4 +1,4 @@
-ROOT 	= $$PWD
+ROOT 	= $$PWD/..
 SRC		= $$ROOT/src
 OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
@@ -28,6 +28,12 @@ android {
 	DEFINES += OSC_HOST_LITTLE_ENDIAN 
     DISTFILES +=  AndroidManifest.xml
 }
+
+ios {
+    QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+	DEFINES += IOS 
+}
+
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
 
-RESOURCES += Greensounds.qrc
+RESOURCES += tmp-rsc/Greensounds.qrc
