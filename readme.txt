@@ -64,6 +64,10 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.53
+- émission des capteurs inhibée en mode 'wait'
+- revision de l'interface utilisateur
+
 version 0.52
 - implémentation du protocole 'wait' 'play' avec un intervalle de 1s.
 - support du message 'quit'
