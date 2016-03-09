@@ -3,7 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
 Rectangle {
-    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight;
+    width: 420; height: 600;
     color: "black"
 
 	function pixelRatio() {

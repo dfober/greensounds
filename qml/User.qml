@@ -4,7 +4,6 @@ import QtQuick.Controls 1.2
 
 Rectangle {
 	id: gs
-    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight;
     color: "blue"
     property bool mode2;
     mode2: false; 

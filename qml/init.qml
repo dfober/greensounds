@@ -2,7 +2,10 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 
 Rectangle {
-    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight;
+    property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
+    
+	width:  mobile ? Screen.desktopAvailableWidth : 420;
+	height: mobile ? Screen.desktopAvailableHeight : 600;
     color: "black"
 
     function timeChanged() {

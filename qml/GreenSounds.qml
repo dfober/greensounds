@@ -11,17 +11,24 @@ Rectangle {
         else
             main.state = "user";
     }
+    
+    property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
+    
 
-    width: Screen.desktopAvailableWidth; 
-    height: Screen.desktopAvailableHeight;
+	width:  mobile ? Screen.desktopAvailableWidth : 420;
+	height: mobile ? Screen.desktopAvailableHeight : 600;
 
 	SensorUI {
 		id: page1
+		width: parent.width
+		height: parent.height
 	}
 	User {
 		id: page2
 		anchors.top: page1.top
 		anchors.left: page1.right
+		width: parent.width
+		height: parent.height
 	}
 
     states: [
