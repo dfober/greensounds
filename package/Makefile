@@ -1,13 +1,24 @@
 
 
-VERSION := 0.52
+VERSION := 0.53
 PACKAGE := Greensounds-$(VERSION)
 
-ANDROIDDIR := ../build/android/android-build
+ANDROIDDIR := ../build
+IOSDIR := ../build/ios
 
-android:
+all:
 	[ -d $(PACKAGE) ] || mkdir $(PACKAGE)
-	cp $(ANDROIDDIR)/bin/QtApp-debug.apk $(PACKAGE)/$(PACKAGE).apk
+	make common
+	make android
+	make ios
+	tar czf $(PACKAGE).tgz $(PACKAGE)
+
+common:
 	cp ../Greensounds/sensors.maxpat $(PACKAGE)
 	cp ../readme.txt $(PACKAGE)
-	tar czf $(PACKAGE).tgz $(PACKAGE)
+
+android:
+	cp $(ANDROIDDIR)/Greensounds.apk $(PACKAGE)/$(PACKAGE).apk
+
+ios:
+	cp -rf $(IOSDIR)/Release-iphoneos/Greensounds.app $(PACKAGE)/$(PACKAGE).app
