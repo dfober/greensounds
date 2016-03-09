@@ -82,6 +82,7 @@ class Sensors : public QObject
 	std::string		fIPStr;
 	bool			fConnected;
 	bool			fSkipError;
+	bool			fPlay;			// boolean to xmit the sensors value
 
 	void initSensors ();
 	void destchge ();
@@ -114,6 +115,10 @@ class Sensors : public QObject
 		bool skip() const					{ return fSkipError; }
 		void skipChge(int state);
 		void start(QObject * o);
+
+		void start();		// start the time task
+		void stop();		// stop the time task
+
 
 	template <typename T>	void send (const char * addr, T value) const
 	{

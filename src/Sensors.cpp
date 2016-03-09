@@ -48,6 +48,8 @@ const char* kSliderBaseAddr	= "/slider/";
 //------------------------------------------------------------------------
 void Sensors::timerEvent(QTimerEvent * )
 {
+	if (!fPlay) return;
+
 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
 		Sensor* sensor = fSensors[i];
 		if (sensor && sensor->active()) {
@@ -75,7 +77,7 @@ void Sensors::initSensors()
 //------------------------------------------------------------------------
 Sensors::Sensors()
 	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), //fListener(this, LISTENING_PORT),
-	fConnected(false), fSkipError(false), fTimerID(0)
+	fConnected(false), fSkipError(false), fPlay(false), fTimerID(0)
 {
 	initSensors();
 	fDestination = DEFAULT_ADDRESS;
@@ -84,9 +86,9 @@ Sensors::Sensors()
 	try {
 		fSocket = new UdpSocket();
 		if (fSocket) fSocket->allowBroadcast();
-		fTimerID = startTimer(10);
 		fIPNum = Tools::getIP();
 		fIPStr = Tools::ip2string(fIPNum);
+		fTimerID = startTimer(10);
 	}
 	catch(std::exception e) {
 		fSocket = 0;
@@ -101,6 +103,10 @@ Sensors::~Sensors()
 		delete fSensors[i];
 	}
 }
+
+//------------------------------------------------------------------------
+void Sensors::start()		{ fPlay = true; }
+void Sensors::stop()		{ fPlay = false;}
 
 //------------------------------------------------------------------------
 void Sensors::connect(const char* dst)

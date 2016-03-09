@@ -14,8 +14,8 @@
 #include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
-const float kVersion = 0.52;
-const char* kVersionStr = "0.52";
+const float kVersion = 0.53;
+const char* kVersionStr = "0.53";
 
 using namespace std;
 
@@ -48,7 +48,7 @@ SensorAppl::~SensorAppl()
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
-    fView.setSource(QUrl("qrc:/qml/init.qml"));
+    fView.setSource(QUrl("qrc:/init.qml"));
     fView.rootContext()->setContextProperty("sensors", &fSensors);
     fView.show();
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
@@ -59,7 +59,7 @@ void SensorAppl::start()
 //------------------------------------------------------------------------
 void SensorAppl::greensound()
 {
-	fView.setSource(QUrl("qrc:/qml/wait.qml"));
+	fView.setSource(QUrl("qrc:/wait.qml"));
 	fView.rootContext()->setContextProperty("sensors", &fSensors);
 	fSensors.start((QObject*)fView.rootObject());
 	fRunning = true;
@@ -70,6 +70,7 @@ void SensorAppl::wait()
 {
 	fWait = true;
 	fUISwitch = true;
+	fSensors.stop();
 }
 
 //------------------------------------------------------------------------
@@ -77,6 +78,7 @@ void SensorAppl::play()
 {
 	fWait = false;
 	fUISwitch = true;
+	fSensors.start();
 }
 
 //------------------------------------------------------------------------
@@ -86,9 +88,9 @@ void SensorAppl::timerEvent(QTimerEvent*)
 	if (fRunning) {
 		if (fUISwitch) {
 			if (fWait)
-				fView.setSource(QUrl("qrc:/qml/wait.qml"));
+				fView.setSource(QUrl("qrc:/wait.qml"));
 			else
-				fView.setSource(QUrl("qrc:/qml/GreenSounds.qml"));
+				fView.setSource(QUrl("qrc:/GreenSounds.qml"));
 			fUISwitch = false;
 		}
 		fSensors.send(kGreensoundsAddr, fSensors.ipstr(), fWait ? "wait" : "play");
@@ -99,7 +101,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 			greensound();
 		}
 		else
-			fView.setSource(QUrl("qrc:/qml/error.qml"));
+			fView.setSource(QUrl("qrc:/error.qml"));
 	}
 	else if (ntry < 5) {
 		fSensors.hello();
@@ -108,7 +110,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 	else if (fSensors.skip()) {
 			greensound();
 	}
-	else fView.setSource(QUrl("qrc:/qml/error.qml"));
+	else fView.setSource(QUrl("qrc:/error.qml"));
 }
 
 //------------------------------------------------------------------------
