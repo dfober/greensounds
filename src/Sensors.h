@@ -84,14 +84,14 @@ class Sensors : public QObject
 	bool			fSkipError;
 	bool			fPlay;			// boolean to xmit the sensors value
 
-	void initSensors ();
 	void destchge ();
+//	void initSensors ();
 	
 	public:
 		typedef std::map<int, Sensor*> TSensors;
 
-		Q_INVOKABLE void activate(int index, bool state);
-		Q_INVOKABLE bool available(int index);
+//		Q_INVOKABLE void activate(int index, bool state);
+//		Q_INVOKABLE bool available(int index);
 		Q_INVOKABLE void destination(QString dest);
 		Q_INVOKABLE void port(QString port);
 		Q_INVOKABLE void param(int num, bool state);
@@ -113,11 +113,12 @@ class Sensors : public QObject
 		void connect(const char* dst);
 		bool connected() const				{ return fConnected; }
 		bool skip() const					{ return fSkipError; }
-		void skipChge(int state);
+//		void skipChge(int state);
 		void start(QObject * o);
 
 		void start();		// start the time task
 		void stop();		// stop the time task
+		bool initSensor (); // initialises the rotation sensor
 
 
 	template <typename T>	void send (const char * addr, T value) const
@@ -138,7 +139,8 @@ class Sensors : public QObject
 		void timerEvent(QTimerEvent * );
 
 	private:
-		TSensors fSensors;
+//		TSensors fSensors;
+		Sensor*  fRotation;
 		int		 fTimerID;
 		QString	 fDestination;
 		int		 fPort;

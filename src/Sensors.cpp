@@ -50,36 +50,59 @@ void Sensors::timerEvent(QTimerEvent * )
 {
 	if (!fPlay) return;
 
-	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
-		Sensor* sensor = fSensors[i];
-		if (sensor && sensor->active()) {
-            int count = sensor->count();
-            if (count) {
-				OSCStream osc;
-                osc.start( sensor->address());
-                for (int i=0; i<count; i++)
-                    osc << sensor->value(i);
-                osc.end();
-                fSocket->SendTo(fDestPoint, osc.Data(), osc.Size());
-            }
+	if (fRotation->active()) {
+		int count = fRotation->count();
+		if (count) {
+			OSCStream osc;
+			osc.start( fRotation->address());
+			for (int i=0; i<count; i++)
+				osc << fRotation->value(i);
+			osc.end();
+			fSocket->SendTo(fDestPoint, osc.Data(), osc.Size());
 		}
 	}
+
+//	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
+//		Sensor* sensor = fSensors[i];
+//		if (sensor && sensor->active()) {
+//            int count = sensor->count();
+//            if (count) {
+//				OSCStream osc;
+//                osc.start( sensor->address());
+//                for (int i=0; i<count; i++)
+//                    osc << sensor->value(i);
+//                osc.end();
+//                fSocket->SendTo(fDestPoint, osc.Data(), osc.Size());
+//            }
+//		}
+//	}
 }
 
 //------------------------------------------------------------------------
-void Sensors::initSensors()
+//void Sensors::initSensors()
+//{
+//	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
+//		fSensors[i] = new Sensor(i);
+//	}
+//}
+
+//------------------------------------------------------------------------
+bool Sensors::initSensor () // initialises the rotation sensor
 {
- 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
-		fSensors[i] = new Sensor(i);
+	fRotation = new Sensor(Sensor::kRotation);
+	if (fRotation && fRotation->available()) {
+		fRotation->activate(true);
+		return true;
 	}
+	return false;
 }
 
 //------------------------------------------------------------------------
 Sensors::Sensors()
 	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), //fListener(this, LISTENING_PORT),
-	fConnected(false), fSkipError(false), fPlay(false), fTimerID(0)
+	fConnected(false), fSkipError(false), fPlay(false), fRotation(0), fTimerID(0)
 {
-	initSensors();
+//	initSensors();
 	fDestination = DEFAULT_ADDRESS;
 	fPort = DEFAULT_PORT;
 	fDestPoint = IpEndpointName (fDestination.toStdString().c_str(), fPort);
@@ -99,9 +122,10 @@ Sensors::Sensors()
 Sensors::~Sensors()
 {
 	killTimer(fTimerID);
- 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
-		delete fSensors[i];
-	}
+	delete fRotation;
+// 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
+//		delete fSensors[i];
+//	}
 }
 
 //------------------------------------------------------------------------
@@ -150,20 +174,20 @@ void Sensors::start(QObject* o)
 //------------------------------------------------------------------------
 // Q_INVOKABLE methods
 //------------------------------------------------------------------------
-void Sensors::activate(int index, bool state)
-{
-	Sensor* s = fSensors[index];
-	if (s) s->activate(state);
-	else if (index == Sensor::kSensorMax)
-		skipChge(state);
-}
-
-bool Sensors::available(int index)
-{
-	Sensor* s = fSensors[index];
-	if (s) return s->available();
-	return (index == Sensor::kSensorMax);
-}
+//void Sensors::activate(int index, bool state)
+//{
+//	Sensor* s = fSensors[index];
+//	if (s) s->activate(state);
+//	else if (index == Sensor::kSensorMax)
+//		skipChge(state);
+//}
+//
+//bool Sensors::available(int index)
+//{
+//	Sensor* s = fSensors[index];
+//	if (s) return s->available();
+//	return (index == Sensor::kSensorMax);
+//}
 
 void Sensors::destination(QString dest)
 {
@@ -203,13 +227,13 @@ void Sensors::pmode(bool state)
 }
 
 //------------------------------------------------------------------------
-void Sensors::skipChge(int state)
-{
- 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
-		Sensor* s = fSensors[i];
-		if (s) s->skipDuplicates (state);
-    }
-}
+//void Sensors::skipChge(int state)
+//{
+// 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
+//		Sensor* s = fSensors[i];
+//		if (s) s->skipDuplicates (state);
+//    }
+//}
 
 //------------------------------------------------------------------------
 void Sensors::destchge()

@@ -48,12 +48,18 @@ SensorAppl::~SensorAppl()
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
-    fView.setSource(QUrl("qrc:/init.qml"));
-    fView.rootContext()->setContextProperty("sensors", &fSensors);
-    fView.show();
+	if (!fSensors.initSensor()) {
+		fView.setSource(QUrl("qrc:/nosensor-error.qml"));
+	}
+    else {
+		fView.setSource(QUrl("qrc:/init.qml"));
+		fView.rootContext()->setContextProperty("sensors", &fSensors);
+		fView.show();
+		fTimerID = startTimer(1000);
+		fListener.start();
+	}
+	fView.show();
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
-    fTimerID = startTimer(1000);
-	fListener.start();
 }
 
 //------------------------------------------------------------------------
@@ -101,7 +107,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 			greensound();
 		}
 		else
-			fView.setSource(QUrl("qrc:/error.qml"));
+			fView.setSource(QUrl("qrc:/nonetwork-error.qml"));
 	}
 	else if (ntry < 5) {
 		fSensors.hello();
