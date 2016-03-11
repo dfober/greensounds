@@ -64,6 +64,12 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.54
+- spécialisation sur le capteur de rotation
+- revision de l'interface utilisateur :
+  suppression du panel de sélection des capteurs
+  ajout de panels pour la gestion des erreurs
+
 version 0.53
 - émission des capteurs inhibée en mode 'wait'
 - revision de l'interface utilisateur

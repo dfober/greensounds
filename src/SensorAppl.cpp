@@ -14,8 +14,8 @@
 #include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
-const float kVersion = 0.53;
-const char* kVersionStr = "0.53";
+const float kVersion = 0.54;
+const char* kVersionStr = "0.54";
 
 using namespace std;
 
@@ -45,11 +45,16 @@ SensorAppl::~SensorAppl()
 	fListener.terminate();
 }
 
+//#define TESTMOTO
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
+#ifdef TESTMOTO
+	if (false) {
+#else
 	if (!fSensors.initSensor()) {
-		fView.setSource(QUrl("qrc:/nosensor-error.qml"));
+#endif
+		fView.setSource(QUrl("qrc:/failsensor.qml"));
 	}
     else {
 		fView.setSource(QUrl("qrc:/init.qml"));
@@ -107,7 +112,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 			greensound();
 		}
 		else
-			fView.setSource(QUrl("qrc:/nonetwork-error.qml"));
+			fView.setSource(QUrl("qrc:/failnetwork.qml"));
 	}
 	else if (ntry < 5) {
 		fSensors.hello();
@@ -116,7 +121,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 	else if (fSensors.skip()) {
 			greensound();
 	}
-	else fView.setSource(QUrl("qrc:/error.qml"));
+	else fView.setSource(QUrl("qrc:/failnetwork.qml"));
 }
 
 //------------------------------------------------------------------------
