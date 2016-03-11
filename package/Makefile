@@ -1,6 +1,6 @@
 
 
-VERSION := 0.53
+VERSION := 0.54
 PACKAGE := Greensounds-$(VERSION)
 
 ANDROIDDIR := ../build
@@ -10,7 +10,7 @@ all:
 	[ -d $(PACKAGE) ] || mkdir $(PACKAGE)
 	make common
 	make android
-	make ios
+#	make ios
 	tar czf $(PACKAGE).tgz $(PACKAGE)
 
 common:
