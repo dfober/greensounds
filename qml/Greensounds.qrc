@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-		<file>nonetwork-error.qml</file>
-		<file>nosensor-error.qml</file>
+		<file>failnetwork.qml</file>
+		<file>failsensor.qml</file>
 		<file>init.qml</file>
 		<file>wait.qml</file>
 		<file>User.qml</file>

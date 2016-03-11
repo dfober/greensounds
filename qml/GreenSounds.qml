@@ -30,19 +30,4 @@ Rectangle {
 		width: parent.width
 		height: parent.height
 	}
-
-//    states: [
-//        State {
-//            name: "user"
-//            PropertyChanges { target: page1; x: -main.width }
-//        },
-//        State {
-//            name: "ctrl"
-//            PropertyChanges { target: page1; x: 0 }
-//        }
-//    ]
-
-	transitions: Transition {
-		PropertyAnimation { property: "x"; duration: 500; easing.type: Easing.OutQuad }
-	}
 }
