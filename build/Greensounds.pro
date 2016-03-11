@@ -6,8 +6,8 @@ else  { OSCIP = $$OSC/ip/posix }
 
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
-SOURCES += $$files($$OSC/ip/*.cpp)						# oscpack files
-SOURCES += $$files($$OSCIP/*.cpp)						# oscpack files
+SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
+SOURCES += $$files($$OSCIP/*.cpp)					# oscpack files
 HEADERS += $$files($$SRC/*.h)
 
 ANDROID_PACKAGE_SOURCE_DIR = $$ROOT/rsrc
@@ -31,7 +31,8 @@ android {
 
 ios {
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
-	DEFINES += IOS 
+	ICON   = $$ROOT/rsrc/greensounds.icns
+    CONFIG+= arm64 armv7 armv7s
 }
 
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
