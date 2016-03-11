@@ -1,10 +1,9 @@
 <RCC>
     <qresource prefix="/">
-		<file>error.qml</file>
+		<file>nonetwork-error.qml</file>
+		<file>nosensor-error.qml</file>
 		<file>init.qml</file>
 		<file>wait.qml</file>
-		<file>SensorUI.qml</file>
-		<file>SensorsList.qml</file>
 		<file>User.qml</file>
 		<file>Param.qml</file>
 		<file>USlider.qml</file>

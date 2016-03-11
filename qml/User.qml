@@ -44,11 +44,11 @@ Rectangle {
 		USlider { num: 2; }
 	}
 
-	Button {
-		text: "Control"
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.bottom: gs.bottom
-		anchors.bottomMargin:  20 * pixelRatio()
-		onClicked: toggle();
-	}
+//	Button {
+//		text: "Control"
+//		anchors.horizontalCenter: parent.horizontalCenter
+//		anchors.bottom: gs.bottom
+//		anchors.bottomMargin:  20 * pixelRatio()
+//		onClicked: toggle();
+//	}
 }
