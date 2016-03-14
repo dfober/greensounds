@@ -14,8 +14,8 @@
 #include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
-const float kVersion = 0.54;
-const char* kVersionStr = "0.54";
+const float kVersion = 0.55;
+const char* kVersionStr = "0.55";
 
 using namespace std;
 
@@ -49,10 +49,11 @@ SensorAppl::~SensorAppl()
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
+	bool ret = fSensors.initSensor();
 #ifdef TESTMOTO
 	if (false) {
 #else
-	if (!fSensors.initSensor()) {
+	if (!ret) {
 #endif
 		fView.setSource(QUrl("qrc:/failsensor.qml"));
 	}
