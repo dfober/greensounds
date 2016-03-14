@@ -64,6 +64,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.56
+- l'application quitte lorsqu'elle passe en mode veille
+
 version 0.55
 - correction de bug: version 0.54 compilée pour Moto E (i.e. sans rotation) et qui crashe en mode play
 
