@@ -26,17 +26,12 @@ echo " updating $LPRO"
 sed "s/^VERSION = ..*/VERSION = $VERSION/" $LPRO > TMP$$
 mv -f TMP$$ $LPRO
 
-ITL=$ROOT/src/SensorAppl.cpp
-echo " updating $ITL  (recompile)"
-sed "s/[1-9]\.[0-9][0-9]/$VERSION/" $ITL > TMP$$
-mv -f TMP$$ $ITL
-
 PKG=$ROOT/package/Makefile
 echo " updating $PKG"
 sed "s/\(VERSION := \)[0-9]*\.[0-9]*/\1$VERSION/" $PKG > TMP$$
 mv -f TMP$$ $PKG
 
-echo "==> change manually AndroiManifest"
-open -t rsrc/AndroidManifest.xml
+echo "==> change manually AndroiManifest and SensorAppl.cpp"
+open -t rsrc/AndroidManifest.xml src/SensorAppl.cpp
 
 exit 0

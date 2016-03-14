@@ -14,8 +14,8 @@
 #include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
-const float kVersion = 0.56;
-const char* kVersionStr = "0.56";
+const float kVersion = 0.57;
+const char* kVersionStr = "0.57";
 
 using namespace std;
 

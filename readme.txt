@@ -64,6 +64,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.57
+- 
+
 version 0.56
 - l'application quitte lorsqu'elle passe en mode veille
 
