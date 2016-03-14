@@ -4,6 +4,7 @@ OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
 else  { OSCIP = $$OSC/ip/posix }
 
+VERSION = 0.56
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
@@ -37,4 +38,4 @@ ios {
 
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
 
-RESOURCES += tmp-rsc/Greensounds.qrc
+RESOURCES += qml/Greensounds.qrc
