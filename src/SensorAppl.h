@@ -60,6 +60,8 @@ class OSCListener : public osc::OscPacketListener, public QThread
 //------------------------------------------------------------------------
 class SensorAppl : public QApplication
 {
+	Q_OBJECT
+	
 	QQuickView	fView;				// the current view
 	int			fTimerID;			// the timer id
 	Sensors		fSensors;			// the sensors
@@ -78,10 +80,13 @@ class SensorAppl : public QApplication
 		void play();
 		void greensound();
 		void connect_to(const char* dst)	{ fSensors.connect(dst); }
-		const Sensors* sensors() const  { return &fSensors; }
+		const Sensors* sensors() const		{ return &fSensors; }
 	
 	protected:
         void timerEvent(QTimerEvent * e);
+
+	public slots:
+		void stateChanged(Qt::ApplicationState state);
 };
 
 #endif

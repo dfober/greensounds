@@ -14,8 +14,8 @@
 #include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
-const float kVersion = 0.55;
-const char* kVersionStr = "0.55";
+const float kVersion = 0.56;
+const char* kVersionStr = "0.56";
 
 using namespace std;
 
@@ -45,12 +45,12 @@ SensorAppl::~SensorAppl()
 	fListener.terminate();
 }
 
-//#define TESTMOTO
+//#define TESTMOTOE
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
 	bool ret = fSensors.initSensor();
-#ifdef TESTMOTO
+#ifdef TESTMOTOE
 	if (false) {
 #else
 	if (!ret) {
@@ -66,6 +66,15 @@ void SensorAppl::start()
 	}
 	fView.show();
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
+	connect((QObject*)this, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(stateChanged(Qt::ApplicationState)));
+}
+
+//------------------------------------------------------------------------
+void SensorAppl::stateChanged(Qt::ApplicationState state)
+{
+	if ((state == Qt::ApplicationSuspended) || ((state == Qt::ApplicationInactive))) {
+		quit();
+	}
 }
 
 //------------------------------------------------------------------------
