@@ -8,7 +8,7 @@ import QtQuick.Window 2.2
 
 		id: slider
 		property int num; 
-		width: 80
+		width: 10*Screen.pixelDensity;
 		height: width; 
 		color: "black";
 		antialiasing: true
