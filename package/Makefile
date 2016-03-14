@@ -1,6 +1,6 @@
 
 
-VERSION := 0.54
+VERSION := 0.55
 PACKAGE := Greensounds-$(VERSION)
 
 ANDROIDDIR := ../build
@@ -11,7 +11,7 @@ all:
 	make common
 	make android
 #	make ios
-	tar czf $(PACKAGE).tgz $(PACKAGE)
+#	tar czf $(PACKAGE).tgz $(PACKAGE)
 
 common:
 	cp ../Greensounds/sensors.maxpat $(PACKAGE)

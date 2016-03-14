@@ -64,6 +64,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.55
+- correction de bug: version 0.54 compilée pour Moto E (i.e. sans rotation) et qui crashe en mode play
+
 version 0.54
 - spécialisation sur le capteur de rotation
 - revision de l'interface utilisateur :
