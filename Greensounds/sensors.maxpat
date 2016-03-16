@@ -28,7 +28,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 690.0, 559.0, 172.0, 23.0 ],
-					"presentation_rect" : [ 690.0, 559.0, 0.0, 0.0 ],
 					"text" : "Adresses de machines"
 				}
 
@@ -43,7 +42,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 209.0, 607.0, 172.0, 23.0 ],
-					"presentation_rect" : [ 659.0, 710.0, 0.0, 0.0 ],
 					"text" : "Adresses de broadcast"
 				}
 
@@ -57,7 +55,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 852.0, 592.0, 104.0, 20.0 ],
-					"presentation_rect" : [ 855.0, 532.0, 0.0, 0.0 ],
 					"text" : "pour réseau PAJ"
 				}
 
@@ -71,7 +68,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 338.0, 687.0, 104.0, 20.0 ],
-					"presentation_rect" : [ 835.0, 657.0, 0.0, 0.0 ],
 					"text" : "pour réseau PAJ"
 				}
 
@@ -109,20 +105,19 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 143.0, 576.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 639.0, 562.0, 0.0, 0.0 ]
+					"patching_rect" : [ 143.0, 576.0, 20.0, 20.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-26",
+					"int" : 1,
 					"maxclass" : "gswitch2",
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 143.0, 605.0, 39.0, 32.0 ],
-					"presentation_rect" : [ 639.0, 595.0, 0.0, 0.0 ]
+					"patching_rect" : [ 143.0, 605.0, 39.0, 32.0 ]
 				}
 
 			}
@@ -147,8 +142,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 688.0, 625.0, 167.0, 20.0 ],
-					"text" : "udpsend 192.168.1.168 8000"
+					"patching_rect" : [ 688.0, 625.0, 160.0, 20.0 ],
+					"text" : "udpsend 192.168.1.91 8000"
 				}
 
 			}
@@ -166,6 +161,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-35",
+					"int" : 1,
 					"maxclass" : "gswitch2",
 					"numinlets" : 2,
 					"numoutlets" : 2,
