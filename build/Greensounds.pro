@@ -39,4 +39,4 @@ ios {
 
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
 
-RESOURCES += qml/greensounds.qrc
+RESOURCES += rsc/greensounds.qrc
