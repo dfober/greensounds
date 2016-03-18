@@ -19,7 +19,7 @@ UI_DIR  = ./tmpSrc
 DESTDIR = $$PWD
 
 macx:CONFIG+=x86_64
-QT += qml quick widgets network sensors
+QT += widgets quick sensors
 
 INCLUDEPATH += $$OSC
 
@@ -31,11 +31,12 @@ android {
 }
 
 ios {
+	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
-	ICON   = $$ROOT/rsrc/greensounds.icns
+    ICON   = $$ROOT/rsrc/greensounds.icns
     CONFIG+= arm64 armv7 armv7s
 }
 
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
 
-RESOURCES += qml/Greensounds.qrc
+RESOURCES += qml/greensounds.qrc
