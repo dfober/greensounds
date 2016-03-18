@@ -2,11 +2,11 @@
     <qresource prefix="/">
 		<file>failnetwork.qml</file>
 		<file>failsensor.qml</file>
-		<file>init.qml</file>
-		<file>wait.qml</file>
-		<file>User.qml</file>
-		<file>Param.qml</file>
-		<file>USlider.qml</file>
-		<file>GreenSounds.qml</file>
+		<file>GSinit.qml</file>
+		<file>GSwait.qml</file>
+		<file>GSplay.qml</file>
+		<file>GSparam.qml</file>
+		<file>GSslider.qml</file>
+		<file>greensounds.qml</file>
     </qresource>
 </RCC>

@@ -58,7 +58,7 @@ void SensorAppl::start()
 		fView.setSource(QUrl("qrc:/failsensor.qml"));
 	}
     else {
-		fView.setSource(QUrl("qrc:/init.qml"));
+		fView.setSource(QUrl("qrc:/GSinit.qml"));
 		fView.rootContext()->setContextProperty("sensors", &fSensors);
 		fView.show();
 		fTimerID = startTimer(1000);
@@ -80,7 +80,7 @@ void SensorAppl::stateChanged(Qt::ApplicationState state)
 //------------------------------------------------------------------------
 void SensorAppl::greensound()
 {
-	fView.setSource(QUrl("qrc:/wait.qml"));
+	fView.setSource(QUrl("qrc:/GSwait.qml"));
 	fView.rootContext()->setContextProperty("sensors", &fSensors);
 	fSensors.start((QObject*)fView.rootObject());
 	fRunning = true;
@@ -109,9 +109,9 @@ void SensorAppl::timerEvent(QTimerEvent*)
 	if (fRunning) {
 		if (fUISwitch) {
 			if (fWait)
-				fView.setSource(QUrl("qrc:/wait.qml"));
+				fView.setSource(QUrl("qrc:/GSwait.qml"));
 			else
-				fView.setSource(QUrl("qrc:/GreenSounds.qml"));
+				fView.setSource(QUrl("qrc:/greensounds.qml"));
 			fUISwitch = false;
 		}
 		fSensors.send(kGreensoundsAddr, fSensors.ipstr(), fWait ? "wait" : "play");

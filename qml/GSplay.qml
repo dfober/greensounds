@@ -28,9 +28,9 @@ Rectangle {
 		spacing: 20 * pixelRatio()
 		y: 30 * pixelRatio()
 		anchors.horizontalCenter: parent.horizontalCenter
-		Param { num: 1; }
-		Param { num: 2; }
-		Param { num: 3; }
+		GSparam { num: 1; }
+		GSparam { num: 2; }
+		GSparam { num: 3; }
 	}
 
 	Row {
@@ -40,8 +40,8 @@ Rectangle {
 		anchors.topMargin: params.height
 		anchors.top: params.bottom
 		anchors.bottom: gs.bottom
-		USlider { num: 1; }
-		USlider { num: 2; }
+		GSslider { num: 1; }
+		GSslider { num: 2; }
 	}
 
 //	Button {

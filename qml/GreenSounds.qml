@@ -18,15 +18,8 @@ Rectangle {
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;
 
-//	SensorUI {
-//		id: page1
-//		width: parent.width
-//		height: parent.height
-//	}
-	User {
+	GSplay {
 		id: page2
-//		anchors.top: page1.top
-//		anchors.left: page1.right
 		width: parent.width
 		height: parent.height
 	}
