@@ -32,7 +32,7 @@ android {
 ios {
 	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
-	ios_icon.files = $$files($$ROOT/rsrc/ios/*.png)
+	ios_icon.files = $$files($$ROOT/rsrc/ios.iconset/*.png)
 	QMAKE_BUNDLE_DATA += ios_icon
     ICON   = $$ROOT/rsrc/greensounds.icns
     CONFIG+= arm64 armv7 armv7s
