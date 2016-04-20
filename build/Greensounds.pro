@@ -25,7 +25,6 @@ INCLUDEPATH += $$OSC
 
 android { 
 	OTHER_FILES += rsrc AndroidManifest.xml
-
 	DEFINES += OSC_HOST_LITTLE_ENDIAN 
     DISTFILES +=  AndroidManifest.xml
 }
@@ -33,10 +32,12 @@ android {
 ios {
 	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+	ios_icon.files = $$files($$ROOT/rsrc/ios/*.png)
+	QMAKE_BUNDLE_DATA += ios_icon
     ICON   = $$ROOT/rsrc/greensounds.icns
     CONFIG+= arm64 armv7 armv7s
 }
 
 unix:!macx:!ios:!android { DEFINES += OSC_HOST_LITTLE_ENDIAN }
 
-RESOURCES += rsc/greensounds.qrc
+RESOURCES += tmprsc/greensounds.qrc

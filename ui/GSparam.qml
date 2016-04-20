@@ -1,23 +1,21 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 
-Rectangle {
+Image {
 	id: button
 	property int num; 
 	property bool state;
 	state: false;
 
+	source: "BoutonOff.png"
 	width: 40 * pixelRatio();  height: width; 
-	border.width: 2; border.color: "black";
-	color: "red";
 	antialiasing: true
-	radius: width/2
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			if (button.state) button.color = "red";
-			else button.color = "#53ED42";
 			button.state = !button.state;
+			if (button.state) source = "BoutonOn.png";
+			else source = "BoutonOff.png";
 			sensors.param (button.num, button.state);
 		}
 	}

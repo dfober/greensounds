@@ -1,18 +1,30 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 
-	Rectangle {
-		function diam(w,h) {
-			return (w < h) ? w/6 : h/6;
-		}
+Item {
+	property int num; 
+	height: parent.height;
+	width: slider.width;
 
+	Rectangle {
+		x: slider.x + (slider.width / 2) - 4 
+		y: slider.height/4
+		height: sliders.height - slider.height;
+		width: 8; 
+		border.width: 1 
+		color: "#21498C"
+		border.color: "#D288D8"
+		radius: 8
+	}
+	
+	Image {
+		function getImage(num)  {  (num == 1) ? "CurseurEspace.png" : "Curseur.png"; }
 		id: slider
-		property int num; 
-		width: 10*Screen.pixelDensity;
+
+		source: (num == 1) ? "CurseurEspace.png" : "Curseur.png";
+		width: 50;
 		height: width; 
-		color: "black";
 		antialiasing: true
-		radius: width/2
 		MouseArea {
 			anchors.fill: parent
 			drag.target: parent
@@ -25,3 +37,4 @@ import QtQuick.Window 2.2
 			}
 		}
 	}
+}
