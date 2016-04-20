@@ -4,7 +4,8 @@
 QMAKE 			?= qmake
 QMAKEIOS 		?= qmake-ios
 QMAKEANDROID 	?= qmake-android
-RSC	 := ./rsc
+RSC	:= ./tmprsc
+QML := ../ui
 
 #===============================================================
 # building Greensounds for Mac OS X
@@ -25,14 +26,16 @@ GSMac:
 #===============================================================
 ios: ios/greensounds.xcodeproj GSiOS
 
-ios/greensounds.xcodeproj: Greensounds.pro
+ios/greensounds.xcodeproj: Greensounds.pro $(RSC)
 	@which $(QMAKEIOS) || (echo "### you must create an alias named '$(QMAKEIOS)' that point to qmake inside your qt/ios distribution and that is available from your PATH."; false;)
 	[ -d ios ] || mkdir ios
-	cp -rf ../qml $(RSC)
 	cd ios && $(QMAKEIOS) ../Greensounds.pro 
 
-GSiOS:
-	cp -rf ../qml $(RSC)
+$(RSC) : $(QML)
+	[ -d $(RSC) ] || mkdir -p $(RSC)
+	cp -f $(QML)/*.* $(RSC)
+
+GSiOS: $(RSC)
 	xcodebuild -jobs 8 -project ios/greensounds.xcodeproj -target Greensounds -configuration Release
 
 #===============================================================
@@ -40,16 +43,14 @@ GSiOS:
 #===============================================================
 SIGN=--sign ../../rsrc/greensound.keystore grame-greensounds  --storepass gramegreensounds
 
-android: android/Makefile GSAndroid
+android: $(RSC) android/Makefile GSAndroid
 
-android/Makefile: Greensounds.pro
+android/Makefile: Greensounds.pro  
 	@which $(QMAKEANDROID) || (echo "### you must create an alias named '$(QMAKEANDROID)' that point to qmake inside your qt/android distribution and that is available from your PATH."; false;)
 	[ -d android ] || mkdir android
-	cp -rf ../qml $(RSC)
 	cd android && $(QMAKEANDROID) -spec android-g++ ../Greensounds.pro 
 
 GSAndroid:
-	cp -rf ../qml $(RSC)
 	make -j 4 -C android -f Makefile
 	[ -d android/android-build ] || mkdir android/android-build
 	cd android && make INSTALL_ROOT=android-build install
