@@ -5,11 +5,13 @@ Image {
 	id: button
 	property int num; 
 	property bool state;
+	property string name;
 	state: false;
 
 	source: "BoutonOff.png"
 	width: 40 * pixelRatio();  height: width; 
 	antialiasing: true
+	objectName: name
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {

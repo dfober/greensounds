@@ -27,9 +27,9 @@ Image {
 		spacing: 20 * pixelRatio()
 		y: 30 * pixelRatio()
 		anchors.horizontalCenter: parent.horizontalCenter
-		GSparam { num: 1; }
-		GSparam { num: 2; }
-		GSparam { num: 3; }
+		GSparam { num: 1; name: "b1" }
+		GSparam { num: 2; name: "b2" }
+		GSparam { num: 3; name: "b3" }
 	}
 
 	Row {

@@ -13,7 +13,6 @@ Rectangle {
     }
     
     property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
-    
 
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;

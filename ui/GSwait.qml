@@ -7,7 +7,7 @@ Image {
 
     property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
     property bool fr: (Qt.locale().name.substring(0,2) == "fr");
-    property string wait: (fr ? "Patentiez..." : "... wait ...");
+    property string wait: (fr ? "...en attente..." : "... wait ...");
     
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;
@@ -42,7 +42,7 @@ Image {
 		anchors.centerIn: parent
 		color: "lightgrey"
 		font.weight: Font.Bold
-		font.pointSize: 24
+		font.pointSize: 20
 	}
 
     Timer {
