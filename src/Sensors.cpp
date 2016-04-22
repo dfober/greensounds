@@ -40,6 +40,7 @@ using namespace osc;
 #define DEFAULT_PORT 7001
 
 const char* kGreensoundsAddr= "/greensounds";
+const char* kButtonsAddr	= "/greensounds/buttons";
 const char* kModeAddr		= "/mode";
 const char*	kParamBaseAddr	= "/param/";
 const char* kSliderBaseAddr	= "/slider/";

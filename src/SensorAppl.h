@@ -69,15 +69,18 @@ class SensorAppl : public QApplication
 	bool		fUISwitch;			// a flag to switch the current UI
 	bool		fRunning;			// the current application state
 	OSCListener	fListener;			// the OSC input manager
+	bool		fSetButtons;		// a flag to activate the buttons settings
+	bool		fButtonsState[3];
 
 	public:
 				 SensorAppl(int& argc, char** argv)
-						: QApplication(argc, argv), fWait(true), fUISwitch(false), fRunning(false), fListener(this, LISTENING_PORT) {}
+						: QApplication(argc, argv), fWait(true), fUISwitch(false), fRunning(false), fListener(this, LISTENING_PORT), fSetButtons(false) {}
 		virtual ~SensorAppl();
 	
 		void start();
 		void wait();
 		void play();
+		void setButtons(int b1, int b2, int b3);
 		void greensound();
 		void connect_to(const char* dst)	{ fSensors.connect(dst); }
 		const Sensors* sensors() const		{ return &fSensors; }

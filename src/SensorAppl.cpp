@@ -12,8 +12,10 @@
 */
 
 #include "SensorAppl.h"
+#include <QQuickItem>
 
 extern const char* kGreensoundsAddr;
+extern const char* kButtonsAddr;
 const float kVersion = 0.57;
 const char* kVersionStr = "0.57";
 
@@ -49,10 +51,10 @@ SensorAppl::~SensorAppl()
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
-	bool ret = fSensors.initSensor();
 #ifdef TESTMOTOE
 	if (false) {
 #else
+	bool ret = fSensors.initSensor();
 	if (!ret) {
 #endif
 		fView.setSource(QUrl("qrc:/failsensor.qml"));
@@ -72,9 +74,11 @@ void SensorAppl::start()
 //------------------------------------------------------------------------
 void SensorAppl::stateChanged(Qt::ApplicationState state)
 {
+#ifndef MACOS
 	if ((state == Qt::ApplicationSuspended) || ((state == Qt::ApplicationInactive))) {
 		quit();
 	}
+#endif
 }
 
 //------------------------------------------------------------------------
@@ -103,6 +107,15 @@ void SensorAppl::play()
 }
 
 //------------------------------------------------------------------------
+void SensorAppl::setButtons(int b1, int b2, int b3)
+{
+	fButtonsState[0] = b1;
+	fButtonsState[1] = b2;
+	fButtonsState[2] = b3;
+	fSetButtons = true;
+}
+
+//------------------------------------------------------------------------
 void SensorAppl::timerEvent(QTimerEvent*)
 {
 	static int ntry = 1;
@@ -115,7 +128,16 @@ void SensorAppl::timerEvent(QTimerEvent*)
 			fUISwitch = false;
 		}
 		fSensors.send(kGreensoundsAddr, fSensors.ipstr(), fWait ? "wait" : "play");
-		
+		if (fSetButtons) {
+			QQuickItem* root = fView.rootObject();
+			QObject *b = root->findChild<QObject*>("b1");
+			if (b) b->setProperty("visible", fButtonsState[0]);
+			b = root->findChild<QObject*>("b2");
+			if (b) b->setProperty("visible", fButtonsState[1]);
+			b = root->findChild<QObject*>("b3");
+			if (b) b->setProperty("visible", fButtonsState[2]);
+			fSetButtons = false;
+		}
 	}
 	else if (fSensors.connected() ) {
 		if (fSensors.network()) {
@@ -139,6 +161,8 @@ void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpoin
 {
 	string address(m.AddressPattern());
 	
+	try {
+
     if (address == kGreensoundsAddr) {
         osc::ReceivedMessageArgumentIterator i = m.ArgumentsBegin();
 		while (i != m.ArgumentsEnd()) {
@@ -166,4 +190,12 @@ void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpoin
 			i++;
 		}
 	}
+	else if ((address == kButtonsAddr) && (m.ArgumentCount() == 3)) {
+		osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+		osc::int32 b1, b2, b3;
+		args >> b1 >> b2 >> b3;
+		fAppl->setButtons( b1, b2, b3);
+	}
+	}
+	catch(std::exception e) {}
 }

@@ -45,8 +45,13 @@ class Sensor
 		const char*		name() const		{ return fNames[fType]; }
 		const char*		address() const		{ return fOSC[fType]; }
 		QSensor*		sensor()			{ return fSensor; }
+#ifdef MACOS
+		bool			available() const	{ return false; }
+		bool			active() const		{ return false; }
+#else
 		bool			available() const	{ return fSensor->isConnectedToBackend(); }
 		bool			active() const		{ return fSensor->isActive(); }
+#endif
 		void			activate(bool state);
 		int				count();
 		float			value(int i) const	{ return fReader->value(i).value<float>(); }

@@ -55,6 +55,7 @@ Messages émis depuis max
 /greensound play
 /greensound wait
 /greensound quit				: force l'application cliente à quitter
+/greensound/buttons n n n;		: état des boutons de contrôle (0 | 1)
 
 ------------------------------------
  todo

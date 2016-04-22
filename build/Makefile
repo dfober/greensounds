@@ -14,11 +14,11 @@ macos: macos/greensounds.xcodeproj GSMac
 
 macos/greensounds.xcodeproj: Greensounds.pro
 	[ -d macos ] || mkdir macos
-	cp -rf ../qml $(RSC)
+	cp -rf $(QML) $(RSC)
 	cd macos && $(QMAKE) ../Greensounds.pro 
 
 GSMac:
-	cp -rf ../qml $(RSC)
+	cp -rf $(QML) $(RSC)
 	xcodebuild -jobs 8 -project macos/greensounds.xcodeproj -target Greensounds -configuration Release
 
 #===============================================================
