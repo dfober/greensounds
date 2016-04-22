@@ -18,7 +18,12 @@ RCC_DIR = ./tmpSrc
 UI_DIR  = ./tmpSrc
 DESTDIR = $$PWD
 
-macx:CONFIG+=x86_64
+macx {
+	CONFIG+=x86_64
+	DEFINES += TESTMOTOE
+	DEFINES += MACOS
+}
+
 QT += widgets quick sensors
 
 INCLUDEPATH += $$OSC
