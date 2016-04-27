@@ -20,8 +20,14 @@ Image {
 		return Screen.logicalPixelDensity * 25.4 / 72.
 	}
     
-    Image {
-    }
+	Text { 
+		text: "Greensounds"; 
+		anchors.horizontalCenter: parent.horizontalCenter
+		y: 80
+		color: "lightgreen"
+		font.pointSize: 24
+		font.family: "Futura"
+	}
 
     Rectangle {
         id: rect
@@ -44,6 +50,7 @@ Image {
 		anchors.centerIn: parent
 		color: "lightgrey"
 		font.pointSize: 16
+		font.family: "Futura"
 	}
 
     Timer {

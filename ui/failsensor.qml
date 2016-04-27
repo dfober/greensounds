@@ -8,7 +8,9 @@ Rectangle {
 
     property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
     property bool fr: (Qt.locale().name.substring(0,2) == "fr");
-    property string failmsg: (fr ? "Désolé...\nVotre mobile n'est pas \ncompatible avec \ncette application." : "Sorry...\nYour device is not compatible \nwith this application.");
+    property string failmsgfr: "Désolé...\nVotre mobile n'est pas compatible avec cette application.";
+    property string failmsgen: "Sorry...\nYour device is not compatible with this application."
+    property string failmsg: (fr ? failmsgfr :failmsgen);
     property string quit: (fr ? "Quitter" : "Quit");
     
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
@@ -17,7 +19,9 @@ Rectangle {
 	Text { 
 		text: failmsg; 
 		anchors.centerIn: parent
+		width: parent.width / 1.5
 		horizontalAlignment: Text.AlignHCenter
+		wrapMode: Text.WordWrap
 		color: "white"
 		font.pointSize: 20
 	}

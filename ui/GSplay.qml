@@ -11,17 +11,6 @@ Image {
 		return Screen.logicalPixelDensity * 25.4 / 72.
 	}
 
-	MouseArea {
-		anchors.fill: parent
-		onPressed: {
-			gs.mode2 = !gs.mode2;
-			if (gs.mode2) 	state.text = "Jeu B"; 
-			else 			state.text = "Jeu A"; 
-			sensors.pmode (gs.mode2);
-
-		}
-	}
-
 	Row {
 		id: params
 		spacing: 20 * pixelRatio()
@@ -46,7 +35,7 @@ Image {
 
 	Rectangle {
 		anchors.fill: parent
-		anchors.margins: 8
+		anchors.margins: 6 * pixelRatio()
 		border.width: 1.5 
 		color: "#00000000"
 		border.color: "#D288D8"
@@ -56,20 +45,34 @@ Image {
 		id: tb
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: gs.bottom
-        anchors.bottomMargin: 14
+        anchors.bottomMargin: 16 * pixelRatio()
 		text: "greensound"
 		font.family: "Futura"
-		font.pixelSize: 16
+		font.pointSize: 16
 		color: "#00ff7a"
 	}
 	Text {
 		id: state
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: tb.top
-        anchors.bottomMargin: 40
+        anchors.bottomMargin: 50 * pixelRatio()
 		text: "Jeu A"
 		font.family: "Futura"
-		font.pixelSize: 20
+		font.pointSize: 24
 		color: "#8b8adc"
+
+		MouseArea {
+			anchors.horizontalCenter: state.horizontalCenter
+			anchors.verticalCenter: state.verticalCenter
+			width: state.width * 2.5
+			height: state.height * 3
+			onPressed: {
+				gs.mode2 = !gs.mode2;
+				if (gs.mode2) 	state.text = "Jeu B"; 
+				else 			state.text = "Jeu A"; 
+				sensors.pmode (gs.mode2);
+
+			}
+		}
 	}
 }

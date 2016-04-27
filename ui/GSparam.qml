@@ -9,7 +9,7 @@ Image {
 	state: false;
 
 	source: "BoutonOff.png"
-	width: 40 * pixelRatio();  height: width; 
+	width: gs.width / 10;  height: width; 
 	antialiasing: true
 	objectName: name
 	MouseArea {

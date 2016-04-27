@@ -10,7 +10,8 @@ Item {
 		x: slider.x + (slider.width / 2) - 4 
 		y: slider.height/4
 		height: sliders.height - slider.height;
-		width: 8; 
+		width: gs.width / 60; 
+//		width: 8; 
 		border.width: 1 
 		color: "#21498C"
 		border.color: "#D288D8"
@@ -22,7 +23,8 @@ Item {
 		id: slider
 
 		source: (num == 1) ? "CurseurEspace.png" : "Curseur.png";
-		width: 50;
+		width: gs.width / 8;
+//		width: 50;
 		height: width; 
 		antialiasing: true
 		MouseArea {

@@ -7,7 +7,12 @@ Image {
 
     property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
     property bool fr: (Qt.locale().name.substring(0,2) == "fr");
-    property string wait: (fr ? "...en attente..." : "... wait ...");
+
+    property string waitfr: "Patientez !\n\n Vous pourrez jouer dans quelques instants, dès que l'ordinateur pourra établir une connexion avec vous, en fonction de l'occupation par les autres joueurs.\n\nVous pourrez alors piloter le son à la place de l'ordinateur.";
+
+    property string waiten: "Wait!\n You'll be able to play in a few moments, as soon as the computer will be able to establish a connection with you, based on occupation by other players.\n\nThen you'll be able to control the sound instead the computer.";
+
+    property string wait: (fr ? waitfr : waiten);
     
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;
@@ -23,7 +28,9 @@ Image {
     
     Rectangle {
         id: rect
-        width: 150 * pixelRatio(); height: width; anchors.centerIn: parent
+        width: parent.width - 180; 
+        height: width; 
+        anchors.centerIn: parent
         color: "red"
         antialiasing: true
 		gradient: Gradient {
@@ -40,9 +47,14 @@ Image {
 	Text { 
 		text: wait; 
 		anchors.centerIn: parent
-		color: "lightgrey"
+		width: parent.width - 80
+		color: "#00FF7A"
+		horizontalAlignment: Text.AlignHCenter
+		wrapMode: Text.WordWrap
 		font.weight: Font.Bold
 		font.pointSize: 20
+		font.family: "Futura"
+		opacity: 0.7
 	}
 
     Timer {
