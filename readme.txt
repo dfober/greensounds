@@ -65,6 +65,10 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 0.58
+- révision de l'interface utilisateur
+- changement de mode restreint à une zone autour du texte
+
 version 0.57
 - révision de l'interface utilisateur
 

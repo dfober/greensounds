@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<manifest package="fr.grame.greensounds" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.57" android:versionCode="3" android:installLocation="auto">
-    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Greensounds" android:icon="@drawable/icon">
+<manifest package="fr.grame.greensounds" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.58" android:versionCode="4" android:installLocation="auto">
+    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Greensounds" android:icon="@drawable/icon" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:enabled="true">
+		<receiver  android:name=".WifiReceiver" android:enabled="true" > </receiver>
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="Greensounds" android:screenOrientation="portrait" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
