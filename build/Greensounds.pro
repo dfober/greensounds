@@ -4,7 +4,7 @@ OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
 else  { OSCIP = $$OSC/ip/posix }
 
-VERSION = 0.58
+VERSION = 1.00
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
@@ -37,6 +37,7 @@ android {
 ios {
 	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+	QMAKE_INFO_PLIST = $$PWD/Info-ios.plist
 	ios_icon.files = $$files($$ROOT/rsrc/ios.iconset/*.png)
 	QMAKE_BUNDLE_DATA += ios_icon
     ICON   = $$ROOT/rsrc/greensounds.icns
