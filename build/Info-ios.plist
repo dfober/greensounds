@@ -11,13 +11,14 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>inscore</string>
-				<string>ibundle</string>
+				<string>greensound</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>Greensounds</string>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
+			<key>CFBundleTypeName</key>
+			<string>Greensounds File</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -38,6 +39,7 @@
 				<string>Icon-83.5@2x.png</string>
 				<string>Icon-40@3x.png</string>
 				<string>Icon-76.png</string>
+				<string>Icon-152.png</string>
 				<string>Icon-Small.png</string>
 				<string>Icon-Small@2x.png</string>
 				<string>Icon-Small@3x.png</string>
@@ -58,6 +60,7 @@
 				<string>Icon-83.5@2x.png</string>
 				<string>Icon-40@3x.png</string>
 				<string>Icon-76.png</string>
+				<string>Icon-152.png</string>
 				<string>Icon-Small.png</string>
 				<string>Icon-Small@2x.png</string>
 				<string>Icon-Small@3x.png</string>
@@ -125,8 +128,6 @@
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
