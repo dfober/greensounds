@@ -16,7 +16,6 @@ ANDROID_PACKAGE_SOURCE_DIR = $$ROOT/rsrc
 MOC_DIR = ./tmpSrc
 RCC_DIR = ./tmpSrc
 UI_DIR  = ./tmpSrc
-DESTDIR = $$PWD
 
 macx {
 	CONFIG+=x86_64
