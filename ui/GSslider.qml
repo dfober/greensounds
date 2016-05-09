@@ -11,7 +11,6 @@ Item {
 		y: slider.height/4
 		height: sliders.height - slider.height;
 		width: gs.width / 60; 
-//		width: 8; 
 		border.width: 1 
 		color: "#21498C"
 		border.color: "#D288D8"
@@ -24,7 +23,6 @@ Item {
 
 		source: (num == 1) ? "CurseurEspace.png" : "Curseur.png";
 		width: gs.width / 8;
-//		width: 50;
 		height: width; 
 		antialiasing: true
 		MouseArea {
@@ -34,8 +32,8 @@ Item {
 			drag.minimumY: 0
 			drag.maximumY: sliders.height - slider.width*3/2
 			onPositionChanged: {
-//				console.log ("slider " + slider.num + " y: " + (slider.y / (sliders.height - slider.width*3/2)));
-				sensors.slider (slider.num, (slider.y / (sliders.height - slider.width*3/2)));
+				console.log ("slider " + num + " y: " + (slider.y / (sliders.height - slider.width*3/2)));
+				sensors.slider (num, (slider.y / (sliders.height - slider.width*3/2)));
 			}
 		}
 	}

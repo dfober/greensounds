@@ -65,6 +65,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.00
+- bug: fix numéro de slider incorrect
+
 version 0.58
 - révision de l'interface utilisateur
 - changement de mode restreint à une zone autour du texte

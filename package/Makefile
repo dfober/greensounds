@@ -10,7 +10,7 @@ all:
 	[ -d $(PACKAGE) ] || mkdir $(PACKAGE)
 	make common
 	make android
-#	make ios
+	make ios
 #	tar czf $(PACKAGE).tgz $(PACKAGE)
 
 common:
