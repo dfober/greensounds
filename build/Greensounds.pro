@@ -11,7 +11,6 @@ SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
 SOURCES += $$files($$OSCIP/*.cpp)					# oscpack files
 HEADERS += $$files($$SRC/*.h)
 
-ANDROID_PACKAGE_SOURCE_DIR = $$ROOT/rsrc
 
 MOC_DIR = ./tmpSrc
 RCC_DIR = ./tmpSrc
@@ -28,7 +27,8 @@ QT += widgets quick sensors
 INCLUDEPATH += $$OSC
 
 android { 
-	OTHER_FILES += rsrc AndroidManifest.xml
+	ANDROID_PACKAGE_SOURCE_DIR = $$ROOT/rsrc-android
+	OTHER_FILES +=  AndroidManifest.xml
 	DEFINES += OSC_HOST_LITTLE_ENDIAN 
     DISTFILES +=  AndroidManifest.xml
 }
@@ -37,9 +37,9 @@ ios {
 	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
 	QMAKE_INFO_PLIST = $$PWD/Info-ios.plist
-	ios_icon.files = $$files($$ROOT/rsrc/ios.iconset/*.png)
+	ios_icon.files = $$files($$ROOT/rsrc-ios/ios.iconset/*.png)
 	QMAKE_BUNDLE_DATA += ios_icon
-    ICON   = $$ROOT/rsrc/greensounds.icns
+    ICON   = $$ROOT/rsrc-ios/greensounds.icns
     CONFIG+= arm64 armv7 armv7s
 }
 

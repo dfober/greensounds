@@ -41,7 +41,7 @@ GSiOS: $(RSC)
 #===============================================================
 # building Greensounds for Android
 #===============================================================
-SIGN=--sign ../../rsrc/greensound.keystore grame-greensounds  --storepass gramegreensounds
+SIGN=--sign ../../Greensounds/greensound.keystore grame-greensounds  --storepass gramegreensounds
 
 android: $(RSC) android/Makefile GSAndroid
 
