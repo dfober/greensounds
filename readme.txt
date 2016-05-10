@@ -65,6 +65,15 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.003
+- version multi-touch 
+
+version 1.002
+- remplacement de l'image d'un slider 
+
+version 1.001
+- sliders initialisés en bas
+
 version 1.00
 - bug: fix numéro de slider incorrect
 
