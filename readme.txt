@@ -65,6 +65,12 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.01
+- changement bouton on 
+
+version 1.004
+- changement d'icones + bouton off 
+
 version 1.003
 - version multi-touch 
 

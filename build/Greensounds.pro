@@ -4,7 +4,7 @@ OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
 else  { OSCIP = $$OSC/ip/posix }
 
-VERSION = 1.00
+VERSION = 1.01
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
