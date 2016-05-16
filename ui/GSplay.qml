@@ -56,7 +56,7 @@ Image {
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: tb.top
         anchors.bottomMargin: 50 * pixelRatio()
-		text: "Jeu A"
+		text: "Mode A"
 		font.family: "Futura"
 		font.pointSize: 24
 		color: "#8b8adc"
@@ -68,8 +68,8 @@ Image {
 			height: state.height * 3
 			onPressed: {
 				gs.mode2 = !gs.mode2;
-				if (gs.mode2) 	state.text = "Jeu B"; 
-				else 			state.text = "Jeu A"; 
+				if (gs.mode2) 	state.text = "Mode B"; 
+				else 			state.text = "Mode A"; 
 				sensors.pmode (gs.mode2);
 
 			}
