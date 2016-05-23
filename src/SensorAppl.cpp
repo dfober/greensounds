@@ -104,6 +104,7 @@ void SensorAppl::play()
 	fWait = false;
 	fUISwitch = true;
 	fSensors.start();
+	fSensors.pmode(false);
 }
 
 //------------------------------------------------------------------------
