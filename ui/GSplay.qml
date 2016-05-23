@@ -28,7 +28,7 @@ Image {
 		anchors.topMargin: params.height
 		anchors.top: params.bottom
 		anchors.bottom: gs.bottom
-		anchors.bottomMargin: 95
+		anchors.bottomMargin: 120 * pixelRatio()
 		GSslider { num: 1; }
 		GSslider { num: 2; }
 	}
@@ -55,7 +55,7 @@ Image {
 		id: state
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: tb.top
-        anchors.bottomMargin: 50 * pixelRatio()
+        anchors.bottomMargin: 40 * pixelRatio()
 		text: "Mode A"
 		font.family: "Futura"
 		font.pointSize: 24
