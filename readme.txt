@@ -67,6 +67,8 @@ Messages émis depuis max
 ------------------------------------
 version 1.01
 - changement bouton on 
+- émission /mode 1 quand on passe en mode play 
+- modification interface sliders (remontés) pour éviter conflit avec les modes
 
 version 1.004
 - changement d'icones + bouton off 
