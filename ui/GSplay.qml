@@ -51,27 +51,22 @@ Image {
 		font.pointSize: 16
 		color: "#00ff7a"
 	}
-	Text {
+	Image {
 		id: state
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: tb.top
         anchors.bottomMargin: 40 * pixelRatio()
-		text: "Mode A"
-		font.family: "Futura"
-		font.pointSize: 24
-		color: "#8b8adc"
+        source: "ModeA.png"
+        fillMode: Image.PreserveAspectFit
+		width: gs.width / 6; 
 
 		MouseArea {
-			anchors.horizontalCenter: state.horizontalCenter
-			anchors.verticalCenter: state.verticalCenter
-			width: state.width * 2.5
-			height: state.height * 3
+			anchors.fill: state
 			onPressed: {
 				gs.mode2 = !gs.mode2;
-				if (gs.mode2) 	state.text = "Mode B"; 
-				else 			state.text = "Mode A"; 
+				if (gs.mode2) 	state.source = "ModeB.png"; 
+				else 			state.source = "ModeA.png"; 
 				sensors.pmode (gs.mode2);
-
 			}
 		}
 	}
