@@ -69,6 +69,7 @@ version 1.01
 - changement bouton on 
 - émission /mode 1 quand on passe en mode play 
 - modification interface sliders (remontés) pour éviter conflit avec les modes
+- modification interface : image pour les modes A et B
 
 version 1.004
 - changement d'icones + bouton off 
