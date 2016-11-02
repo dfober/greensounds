@@ -65,6 +65,12 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.11
+- valeurs inversées pour android
+
+version 1.1
+- capteurs de rotation remplacés par les accéléromètres
+
 version 1.01
 - changement bouton on 
 - émission /mode 1 quand on passe en mode play 

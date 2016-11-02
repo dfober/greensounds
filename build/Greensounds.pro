@@ -4,7 +4,7 @@ OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
 else  { OSCIP = $$OSC/ip/posix }
 
-VERSION = 1.01
+VERSION = 1.11
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
@@ -29,7 +29,7 @@ INCLUDEPATH += $$OSC
 android { 
 	ANDROID_PACKAGE_SOURCE_DIR = $$ROOT/rsrc-android
 	OTHER_FILES +=  AndroidManifest.xml
-	DEFINES += OSC_HOST_LITTLE_ENDIAN 
+	DEFINES += OSC_HOST_LITTLE_ENDIAN  ANDROID
     DISTFILES +=  AndroidManifest.xml
 }
 
@@ -39,6 +39,7 @@ ios {
 	QMAKE_INFO_PLIST = $$PWD/Info-ios.plist
 	ios_icon.files = $$files($$ROOT/rsrc-ios/ios.iconset/*.png)
 	QMAKE_BUNDLE_DATA += ios_icon
+	DEFINES += IOS 
     ICON   = $$ROOT/rsrc-ios/greensounds.icns
     CONFIG+= arm64 armv7 armv7s
 }

@@ -16,8 +16,8 @@
 
 extern const char* kGreensoundsAddr;
 extern const char* kButtonsAddr;
-const float kVersion = 1.01;
-const char* kVersionStr = "1.01";
+const float kVersion = 1.11f;
+const char* kVersionStr = "1.11";
 
 using namespace std;
 
