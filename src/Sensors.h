@@ -140,7 +140,7 @@ class Sensors : public QObject
 
 	private:
 //		TSensors fSensors;
-		Sensor*  fRotation;
+		Sensor*  fSensor;
 		int		 fTimerID;
 		QString	 fDestination;
 		int		 fPort;

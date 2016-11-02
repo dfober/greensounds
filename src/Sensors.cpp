@@ -51,13 +51,17 @@ void Sensors::timerEvent(QTimerEvent * )
 {
 	if (!fPlay) return;
 
-	if (fRotation->active()) {
-		int count = fRotation->count();
+	if (fSensor->active()) {
+		int count = fSensor->count();
 		if (count) {
 			OSCStream osc;
-			osc.start( fRotation->address());
+			osc.start( fSensor->address());
 			for (int i=0; i<count; i++)
-				osc << fRotation->value(i);
+#ifdef ANDROID
+				osc << -fSensor->value(i);
+#else
+				osc << fSensor->value(i);
+#endif
 			osc.end();
 			fSocket->SendTo(fDestPoint, osc.Data(), osc.Size());
 		}
@@ -90,9 +94,10 @@ void Sensors::timerEvent(QTimerEvent * )
 //------------------------------------------------------------------------
 bool Sensors::initSensor () // initialises the rotation sensor
 {
-	fRotation = new Sensor(Sensor::kRotation);
-	if (fRotation && fRotation->available()) {
-		fRotation->activate(true);
+//	fSensor = new Sensor(Sensor::kRotation);
+	fSensor = new Sensor(Sensor::kAccelerometer);
+	if (fSensor && fSensor->available()) {
+		fSensor->activate(true);
 		return true;
 	}
 	return false;
@@ -101,7 +106,7 @@ bool Sensors::initSensor () // initialises the rotation sensor
 //------------------------------------------------------------------------
 Sensors::Sensors()
 	: fUIRoot(0), fDestPoint("localhost", DEFAULT_PORT), fIPNum(0), //fListener(this, LISTENING_PORT),
-	fConnected(false), fSkipError(false), fPlay(false), fRotation(0), fTimerID(0)
+	fConnected(false), fSkipError(false), fPlay(false), fSensor(0), fTimerID(0)
 {
 //	initSensors();
 	fDestination = DEFAULT_ADDRESS;
@@ -123,7 +128,7 @@ Sensors::Sensors()
 Sensors::~Sensors()
 {
 	killTimer(fTimerID);
-	delete fRotation;
+	delete fSensor;
 // 	for (int i = Sensor::kSensorStart; i < Sensor::kSensorMax; i++) {
 //		delete fSensors[i];
 //	}
