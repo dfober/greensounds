@@ -11,13 +11,18 @@
 
 */
 
-#include "SensorAppl.h"
 #include <QQuickItem>
+#ifdef ANDROID
+# include <QtAndroid>
+# include <QAndroidJniObject>
+#endif
+
+#include "SensorAppl.h"
 
 extern const char* kGreensoundsAddr;
 extern const char* kButtonsAddr;
-const float kVersion = 1.11f;
-const char* kVersionStr = "1.11";
+const float kVersion = 1.12f;
+const char* kVersionStr = "1.12";
 
 using namespace std;
 
@@ -47,6 +52,24 @@ SensorAppl::~SensorAppl()
 	fListener.terminate();
 }
 
+
+#ifdef ANDROID
+static void keepScreenOn()
+{
+    QAndroidJniObject activity = QtAndroid::androidActivity();
+    if (activity.isValid()) {
+        QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
+
+        if (window.isValid()) {
+            const int FLAG_KEEP_SCREEN_ON = 128;
+            window.callObjectMethod("addFlags", "(I)V", FLAG_KEEP_SCREEN_ON);
+        }
+    }
+}
+#else
+static void keepScreenOn()	{}
+#endif
+
 //#define TESTMOTOE
 //------------------------------------------------------------------------
 void SensorAppl::start()
@@ -69,6 +92,7 @@ void SensorAppl::start()
 	fView.show();
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
 	connect((QObject*)this, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(stateChanged(Qt::ApplicationState)));
+	keepScreenOn();
 }
 
 //------------------------------------------------------------------------
