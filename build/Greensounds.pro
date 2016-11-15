@@ -4,7 +4,7 @@ OSC     = $$ROOT/oscpack
 win32 { OSCIP = $$OSC/ip/win32 }
 else  { OSCIP = $$OSC/ip/posix }
 
-VERSION = 1.11
+VERSION = 1.12
 SOURCES += $$files($$SRC/*.cpp)
 SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
@@ -31,6 +31,7 @@ android {
 	OTHER_FILES +=  AndroidManifest.xml
 	DEFINES += OSC_HOST_LITTLE_ENDIAN  ANDROID
     DISTFILES +=  AndroidManifest.xml
+    QT += androidextras
 }
 
 ios {

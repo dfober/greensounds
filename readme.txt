@@ -65,6 +65,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.12
+- android : garde l'écran allumé
+
 version 1.11
 - valeurs inversées pour android
 
