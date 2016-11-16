@@ -3,6 +3,7 @@ greensounds.xcodeproj
 *.pbxproj
 build
 .qmake.stash
+.DS_Store
 tmpSrc
 Debug
 Greensounds.pro.user

@@ -14,14 +14,7 @@ port 7001	: Greensound -> Max
 Messages générés par les capteurs
 ------------------------------------
 /accelerometer	x y z
-/ambientlight 	val			de [0 à 5] (0: Undefined, 1: Dark, 2: Twilight, 3: Light, 4: Bright, 5: Sunny)
-/compass		azimuth calibrationLevel
-/gyroscope		x y z
-/light 			lux
-/magnetometer	x y z
-/orientation	val			de [0 à 6] (0: Undefined, 1: TopUp, 2: TopDown, 3: LeftUp, 4: RightUp, 5: FaceUp, 6: FaceDown)
 /rotation		x y z
-/tilt			x y
 
 ------------------------------------
 Messages générés par les contrôleurs
@@ -56,11 +49,6 @@ Messages émis depuis max
 /greensound wait
 /greensound quit				: force l'application cliente à quitter
 /greensound/buttons n n n;		: état des boutons de contrôle (0 | 1)
-
-------------------------------------
- todo
-------------------------------------
-- voir pb de broadcast
 
 ------------------------------------
  Historique des versions
