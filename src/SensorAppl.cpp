@@ -92,7 +92,7 @@ void SensorAppl::start()
 	fView.show();
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
 	connect((QObject*)this, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(stateChanged(Qt::ApplicationState)));
-	keepScreenOn();
+//	keepScreenOn();
 }
 
 //------------------------------------------------------------------------

@@ -9,16 +9,21 @@ Rectangle {
     property bool fr: (Qt.locale().name.substring(0,2) == "fr");
 
     property string failnetfr: "Désolé...<br />Impossible de se connecter à l'installation !<br /><br />Vérifiez que votre Wifi est actif et connecté au réseau '<b>Greensound</b>' puis réessayez."
-
     property string failneten: "Sorry...<br />Network connection failed! <br /><br />Check that Wifi is ON and connected to the '<b>Greensound</b>' network then retry."
+    property string failnetsp: "Lo sentimos, ¡<br />imposible conectarse al sistema !<br /><br />Asegúrese de que su Wi-Fi está activo y conectado a la red '<b>Greensound</b>' y vuelva a intentarlo."
 
     property string url: "www.grame.fr/greensounds";
     property string urlfr: "Pour plus d'information :<br /><b>" + url + "</b>"
     property string urlen: "More information:<br /><b>" + url + "</b>"
+    property string urlsp: "Para más información:<br /><b>" + url + "</b>"
 
-    property string failnet: 	(fr ? failnetfr : failneten);
-    property string urlmsg: 	(fr ? urlfr : urlen);
-    property string quit: 		(fr ? "Quitter" : "Quit");
+//    property string failnet: 	(fr ? failnetfr : failneten);
+//    property string urlmsg: 	(fr ? urlfr : urlen);
+//    property string quit: 		(fr ? "Quitter" : "Quit");
+
+    property string failnet: 	(failnetsp);
+    property string urlmsg: 	(urlsp);
+    property string quit: 		("Dejar");
 
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;
