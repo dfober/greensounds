@@ -112,7 +112,7 @@ void SensorAppl::start()
 }
 
 //------------------------------------------------------------------------
-void SensorAppl::stateChanged(Qt::ApplicationState )
+void SensorAppl::stateChanged(Qt::ApplicationState state)
 {
 #ifndef MACOS
 	if ((state == Qt::ApplicationSuspended) || ((state == Qt::ApplicationInactive))) {
