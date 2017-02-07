@@ -53,6 +53,9 @@ Messages émis depuis max
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.13
+- révision de l'interface utilisateur
+
 version 1.12
 - page d'erreur en espagnol
 
