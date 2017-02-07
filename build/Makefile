@@ -14,28 +14,32 @@ macos: macos/greensounds.xcodeproj GSMac
 
 macos/greensounds.xcodeproj: Greensounds.pro
 	[ -d macos ] || mkdir macos
-	cp -rf $(QML) $(RSC)
-	cd macos && $(QMAKE) ../Greensounds.pro 
+	cd macos && $(QMAKE) -spec macx-xcode ../Greensounds.pro 
 
 GSMac:
 	cp -rf $(QML) $(RSC)
+	make rsrc
 	xcodebuild -jobs 8 -project macos/greensounds.xcodeproj -target Greensounds -configuration Release
+
+rsrc:
+	[ -d $(RSC) ] && rm -rf $(RSC)
+	mkdir $(RSC)
+	cp $(QML)/*.* $(RSC)
+
 
 #===============================================================
 # building Greensounds for iOS
 #===============================================================
 ios: ios/greensounds.xcodeproj GSiOS
 
-ios/greensounds.xcodeproj: Greensounds.pro $(RSC)
+ios/greensounds.xcodeproj: Greensounds.pro 
 	@which $(QMAKEIOS) || (echo "### you must create an alias named '$(QMAKEIOS)' that point to qmake inside your qt/ios distribution and that is available from your PATH."; false;)
+	make rsrc
 	[ -d ios ] || mkdir ios
 	cd ios && $(QMAKEIOS) ../Greensounds.pro 
 
-$(RSC) : $(QML)
-	[ -d $(RSC) ] || mkdir -p $(RSC)
-	cp -f $(QML)/*.* $(RSC)
-
-GSiOS: $(RSC)
+GSiOS:
+	make rsrc
 	xcodebuild -jobs 8 -project ios/greensounds.xcodeproj -target Greensounds -configuration Release
 
 #===============================================================
@@ -47,10 +51,12 @@ android: $(RSC) android/Makefile GSAndroid
 
 android/Makefile: Greensounds.pro  
 	@which $(QMAKEANDROID) || (echo "### you must create an alias named '$(QMAKEANDROID)' that point to qmake inside your qt/android distribution and that is available from your PATH."; false;)
+	make rsrc
 	[ -d android ] || mkdir android
 	cd android && $(QMAKEANDROID) -spec android-g++ ../Greensounds.pro 
 
 GSAndroid:
+	make rsrc
 	make -j 4 -C android -f Makefile
 	[ -d android/android-build ] || mkdir android/android-build
 	cd android && make INSTALL_ROOT=android-build install
@@ -63,7 +69,7 @@ akey: ../rsrc/greensound.keystore
 
 # To install INScore on your android device add DEVICE variable with device serial number. It can be retreived with 'adb get-serialno'
 installAndroid :
-	adb -s $(shell adb get-serialno) install -r android/android-build/build/outputs/apk/android-build-release-signed.apk
+	adb install -r android/android-build/build/outputs/apk/android-build-release-signed.apk
 
 uninstallAndroid :
 	adb uninstall fr.grame.greensounds
