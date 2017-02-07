@@ -8,12 +8,15 @@
 		<file>GSparam.qml</file>
 		<file>GSslider.qml</file>
 		<file>greensounds.qml</file>
-		<file>BoutonOff.png</file>
-		<file>BoutonOn.png</file>
+		<file>BoutonOff1.png</file>
+		<file>BoutonOn1.png</file>
+		<file>BoutonOff2.png</file>
+		<file>BoutonOn2.png</file>
+		<file>BoutonOff3.png</file>
+		<file>BoutonOn3.png</file>
 		<file>ModeA.png</file>
 		<file>ModeB.png</file>
 		<file>Curseur.png</file>
-		<file>CurseurEspace.png</file>
 		<file>FondNu.png</file>
     </qresource>
 </RCC>

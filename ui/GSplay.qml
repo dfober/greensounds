@@ -11,26 +11,37 @@ Image {
 		return Screen.logicalPixelDensity * 25.4 / 72.
 	}
 
-	Row {
+	Column {
 		id: params
-		spacing: 20 * pixelRatio()
-		y: 30 * pixelRatio()
-		anchors.horizontalCenter: parent.horizontalCenter
-		GSparam { num: 1; name: "b1" }
-		GSparam { num: 2; name: "b2" }
-		GSparam { num: 3; name: "b3" }
+		anchors.right: state.right
+		anchors.top: gs.top
+		anchors.topMargin: 120 * pixelRatio()
+		spacing: 30 * pixelRatio()
+		GSparam { num: 1; }
+		GSparam { num: 3; }
+	}
+	GSparam { 
+		num: 2; 
+		anchors.right: gs.right
+		anchors.rightMargin: 60 * pixelRatio()
+		anchors.bottom: params.bottom
+		anchors.topMargin: 37 * pixelRatio()
 	}
 
-	Row {
+
+	Column {
 		id: sliders
-		spacing: gs.width/3
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.topMargin: params.height
-		anchors.top: params.bottom
+		spacing: 10 * pixelRatio()
+		anchors.topMargin: state.height
+		anchors.top: state.bottom
 		anchors.bottom: gs.bottom
-		anchors.bottomMargin: 120 * pixelRatio()
-		GSslider { num: 1; }
-		GSslider { num: 2; }
+		anchors.bottomMargin: 180 * pixelRatio()
+		anchors.left: gs.left
+		anchors.right: gs.right
+		anchors.leftMargin: 30 * pixelRatio()
+		anchors.rightMargin: 30 * pixelRatio()
+		GSslider { num: 1; label: "Space"; leftstr:"-"; rightstr: "+"; }
+		GSslider { num: 2; label: "Slider"; leftstr:""; rightstr: ""; }
 	}
 
 	Rectangle {
@@ -54,11 +65,10 @@ Image {
 	Image {
 		id: state
         anchors.horizontalCenter: gs.horizontalCenter
-        anchors.bottom: tb.top
-        anchors.bottomMargin: 40 * pixelRatio()
+        anchors.verticalCenter: gs.verticalCenter
         source: "ModeA.png"
         fillMode: Image.PreserveAspectFit
-		width: gs.width / 6; 
+		width: gs.width / 3.5; 
 
 		MouseArea {
 			anchors.fill: state
