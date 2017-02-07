@@ -21,8 +21,8 @@
 
 extern const char* kGreensoundsAddr;
 extern const char* kButtonsAddr;
-const float kVersion = 1.12f;
-const char* kVersionStr = "1.12";
+const float kVersion = 1.13f;
+const char* kVersionStr = "1.13";
 
 using namespace std;
 
@@ -52,51 +52,67 @@ SensorAppl::~SensorAppl()
 	fListener.terminate();
 }
 
-
 #ifdef ANDROID
-static void keepScreenOn()
-{
-    QAndroidJniObject activity = QtAndroid::androidActivity();
-    if (activity.isValid()) {
-        QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
 
-        if (window.isValid()) {
-            const int FLAG_KEEP_SCREEN_ON = 128;
-            window.callObjectMethod("addFlags", "(I)V", FLAG_KEEP_SCREEN_ON);
-        }
-    }
+static void keepScreenOn(bool on)
+{
+	QtAndroid::runOnAndroidThread([on]{
+		QAndroidJniObject activity = QtAndroid::androidActivity();
+		if (activity.isValid()) {
+		  QAndroidJniObject window =
+			  activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
+
+		  if (window.isValid()) {
+			const int FLAG_KEEP_SCREEN_ON = 128;
+			if (on) {
+			  window.callMethod<void>("addFlags", "(I)V", FLAG_KEEP_SCREEN_ON);
+			} else {
+			  window.callMethod<void>("clearFlags", "(I)V", FLAG_KEEP_SCREEN_ON);
+			}
+		  }
+		}
+//		QAndroidJniEnvironment env;
+//		if (env->ExceptionCheck()) {
+//		  env->ExceptionClear();
+//		}
+	});
 }
 #else
-static void keepScreenOn()	{}
+static void keepScreenOn(bool )	{}
 #endif
+
 
 //#define TESTMOTOE
 //------------------------------------------------------------------------
 void SensorAppl::start()
 {
-#ifdef TESTMOTOE
-	if (false) {
-#else
+	keepScreenOn(true);
+	fView.setSource(QUrl("qrc:/GSinit.qml"));
+	fView.rootContext()->setContextProperty("sensors", &fSensors);
+	fView.show();
+
+#ifndef MACOS
 	bool ret = fSensors.initSensor();
 	if (!ret) {
-#endif
 		fView.setSource(QUrl("qrc:/failsensor.qml"));
 	}
     else {
-		fView.setSource(QUrl("qrc:/GSinit.qml"));
-		fView.rootContext()->setContextProperty("sensors", &fSensors);
-		fView.show();
+//		fView.setSource(QUrl("qrc:/GSinit.qml"));
+//		fView.rootContext()->setContextProperty("sensors", &fSensors);
+//		fView.show();
 		fTimerID = startTimer(1000);
 		fListener.start();
 	}
-	fView.show();
+#else
+	fTimerID = startTimer(1000);
+	fListener.start();
+#endif
 	connect((QObject*)fView.engine(), SIGNAL(quit()), this, SLOT(quit()));
 	connect((QObject*)this, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(stateChanged(Qt::ApplicationState)));
-//	keepScreenOn();
 }
 
 //------------------------------------------------------------------------
-void SensorAppl::stateChanged(Qt::ApplicationState state)
+void SensorAppl::stateChanged(Qt::ApplicationState )
 {
 #ifndef MACOS
 	if ((state == Qt::ApplicationSuspended) || ((state == Qt::ApplicationInactive))) {
@@ -176,7 +192,7 @@ void SensorAppl::timerEvent(QTimerEvent*)
 		ntry++;
 	}
 	else if (fSensors.skip()) {
-			greensound();
+		greensound();
 	}
 	else fView.setSource(QUrl("qrc:/failnetwork.qml"));
 }
@@ -187,7 +203,6 @@ void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpoin
 	string address(m.AddressPattern());
 	
 	try {
-
     if (address == kGreensoundsAddr) {
         osc::ReceivedMessageArgumentIterator i = m.ArgumentsBegin();
 		while (i != m.ArgumentsEnd()) {
