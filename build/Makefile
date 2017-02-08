@@ -47,7 +47,7 @@ GSiOS:
 #===============================================================
 SIGN=--sign ../../Greensounds/greensound.keystore grame-greensounds  --storepass gramegreensounds
 
-android: $(RSC) android/Makefile GSAndroid
+android: android/Makefile GSAndroid
 
 android/Makefile: Greensounds.pro  
 	@which $(QMAKEANDROID) || (echo "### you must create an alias named '$(QMAKEANDROID)' that point to qmake inside your qt/android distribution and that is available from your PATH."; false;)
