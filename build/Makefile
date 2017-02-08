@@ -22,7 +22,7 @@ GSMac:
 	xcodebuild -jobs 8 -project macos/greensounds.xcodeproj -target Greensounds -configuration Release
 
 rsrc:
-	[ -d $(RSC) ] && rm -rf $(RSC)
+	-[ -d $(RSC) ] && rm -rf $(RSC)
 	mkdir $(RSC)
 	cp $(QML)/*.* $(RSC)
 
