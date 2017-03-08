@@ -54,7 +54,7 @@ Messages émis depuis max
  Historique des versions
 ------------------------------------
 version 1.13
-- révision de l'interface utilisateur
+- révision de l'interface utilisateur et marche forcée pour android active
 
 version 1.12
 - page d'erreur en espagnol

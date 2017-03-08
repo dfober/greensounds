@@ -57,7 +57,7 @@ Image {
         anchors.horizontalCenter: gs.horizontalCenter
         anchors.bottom: gs.bottom
         anchors.bottomMargin: 16 * pixelRatio()
-		text: "greensound"
+		text: "greensounds"
 		font.family: "Futura"
 		font.pointSize: 16
 		color: "#00ff7a"

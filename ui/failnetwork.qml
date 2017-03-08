@@ -17,13 +17,13 @@ Rectangle {
     property string urlen: "More information:<br /><b>" + url + "</b>"
     property string urlsp: "Para más información:<br /><b>" + url + "</b>"
 
-//    property string failnet: 	(fr ? failnetfr : failneten);
-//    property string urlmsg: 	(fr ? urlfr : urlen);
-//    property string quit: 		(fr ? "Quitter" : "Quit");
+    property string failnet: 	(fr ? failnetfr : failneten);
+    property string urlmsg: 	(fr ? urlfr : urlen);
+    property string quit: 		(fr ? "Quitter" : "Quit");
 
-    property string failnet: 	(failnetsp);
-    property string urlmsg: 	(urlsp);
-    property string quit: 		("Dejar");
+//    property string failnet: 	(failnetsp);
+//    property string urlmsg: 	(urlsp);
+//    property string quit: 		("Dejar");
 
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;

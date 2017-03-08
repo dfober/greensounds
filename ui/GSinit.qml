@@ -6,7 +6,7 @@ Image {
 
     property bool mobile: (Qt.platform.os == "android" || Qt.platform.os == "ios")
     property bool fr: (Qt.locale().name.substring(0,2) == "fr");
-    property string waitmsg: (fr ? "Patentiez..." : "Wait while loading");
+    property string waitmsg: (fr ? "Patientez..." : "Wait while loading");
     
 	width:  mobile ? Screen.desktopAvailableWidth : 420;
 	height: mobile ? Screen.desktopAvailableHeight : 600;
