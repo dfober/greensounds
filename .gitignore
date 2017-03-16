@@ -1,6 +1,8 @@
 Info.plist
 greensounds.xcodeproj
 *.pbxproj
+*.graffle
+*.zip
 build
 .qmake.stash
 .DS_Store
@@ -11,3 +13,7 @@ greensounds.build
 libGreensounds.so
 private
 package/Greensounds*
+ui/old
+ui/*.qmlc
+video
+*.keystore
