@@ -37,7 +37,7 @@ class SensorAppl;
 //------------------------------------------------------------------------
 class OSCListener : public osc::OscPacketListener, public QThread
 {
-	UdpListeningReceiveSocket fSocket;	///< the udp socket listener
+	UdpListeningReceiveSocket * fSocket;	///< the udp socket listener
 	SensorAppl *	fAppl;
 	bool			fRunning;
 
@@ -71,6 +71,8 @@ class SensorAppl : public QApplication
 	OSCListener	fListener;			// the OSC input manager
 	bool		fSetButtons;		// a flag to activate the buttons settings
 	bool		fButtonsState[3];
+
+	void	setButtonState (QObject * button, bool state);
 
 	public:
 				 SensorAppl(int& argc, char** argv)

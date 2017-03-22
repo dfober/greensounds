@@ -28,16 +28,28 @@ using namespace std;
 
 //------------------------------------------------------------------------
 OSCListener::OSCListener(SensorAppl* appl, int port)
-	: fSocket(IpEndpointName( IpEndpointName::ANY_ADDRESS, port ), this), fAppl(appl), fRunning(false) {}
+	: fAppl(appl), fRunning(false)
+{
+	try {
+		fSocket = new UdpListeningReceiveSocket(IpEndpointName( IpEndpointName::ANY_ADDRESS, port ), this);
+	}
+	catch (std::runtime_error e) {
+		cerr << "can't create upd socket: " << e.what() << endl;
+		fSocket = 0;
+	}
+}
 
-OSCListener::~OSCListener()	{ fSocket.AsynchronousBreak(); }
+OSCListener::~OSCListener()	{
+	if (fSocket) fSocket->AsynchronousBreak();
+	delete fSocket;
+}
 
 //------------------------------------------------------------------------
 void OSCListener::run()
 {
 	fRunning = true;
 	try {
-		fSocket.Run(); 
+		if (fSocket) fSocket->Run();
 	}
 	catch (osc::Exception e) {
 		cerr << "osc error: " << e.what() << endl;
@@ -157,6 +169,15 @@ void SensorAppl::setButtons(int b1, int b2, int b3)
 }
 
 //------------------------------------------------------------------------
+void SensorAppl::setButtonState (QObject * button, bool state)
+{
+	if (button) {
+		button->setProperty ("opacity", state ? 1 : 0.4);
+		button->setProperty ("enabled", state);
+	}
+}
+
+//------------------------------------------------------------------------
 void SensorAppl::timerEvent(QTimerEvent*)
 {
 	static int ntry = 1;
@@ -171,12 +192,9 @@ void SensorAppl::timerEvent(QTimerEvent*)
 		fSensors.send(kGreensoundsAddr, fSensors.ipstr(), fWait ? "wait" : "play");
 		if (fSetButtons) {
 			QQuickItem* root = fView.rootObject();
-			QObject *b = root->findChild<QObject*>("b1");
-			if (b) b->setProperty("visible", fButtonsState[0]);
-			b = root->findChild<QObject*>("b2");
-			if (b) b->setProperty("visible", fButtonsState[1]);
-			b = root->findChild<QObject*>("b3");
-			if (b) b->setProperty("visible", fButtonsState[2]);
+			setButtonState (root->findChild<QObject*>("b1"), fButtonsState[0]);
+			setButtonState (root->findChild<QObject*>("b2"), fButtonsState[1]);
+			setButtonState (root->findChild<QObject*>("b3"), fButtonsState[2]);
 			fSetButtons = false;
 		}
 	}
