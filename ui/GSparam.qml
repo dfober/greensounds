@@ -5,12 +5,14 @@ Image {
 	id: button
 	property int num; 
 	property bool state;
+	property string name;
 	state: false;
 
 	source: "Bouton" + "Off" + num + ".png"
 	fillMode: Image.PreserveAspectFit;
 	width: (num == 2 ? gs.width / 6.4 : gs.width / 2.5); 
 	antialiasing: true
+	objectName: name
 
 	MouseArea {
 		anchors.fill: parent

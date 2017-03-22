@@ -17,15 +17,18 @@ Image {
 		anchors.top: gs.top
 		anchors.topMargin: 120 * pixelRatio()
 		spacing: 30 * pixelRatio()
-		GSparam { num: 1; }
-		GSparam { num: 3; }
+		GSparam { num: 1; name: "b1"}
+		GSparam { num: 3; name: "b3"}
 	}
 	GSparam { 
 		num: 2; 
+		name: "b2";
 		anchors.right: gs.right
 		anchors.rightMargin: 60 * pixelRatio()
-		anchors.bottom: params.bottom
-		anchors.topMargin: 37 * pixelRatio()
+//		anchors.bottom: params.bottom
+		anchors.top: gs.top
+//		anchors.topMargin: 37 * pixelRatio()
+		anchors.topMargin: 80 * pixelRatio()
 	}
 
 
