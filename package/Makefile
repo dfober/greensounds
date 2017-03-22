@@ -1,6 +1,6 @@
 
 
-VERSION := 1.13
+VERSION := 1.14
 PACKAGE := Greensounds-$(VERSION)
 
 ANDROIDDIR := ../build
