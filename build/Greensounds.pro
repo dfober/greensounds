@@ -10,6 +10,7 @@ SOURCES += $$files($$OSC/osc/*.cpp)					# oscpack files
 SOURCES += $$files($$OSC/ip/*.cpp)					# oscpack files
 SOURCES += $$files($$OSCIP/*.cpp)					# oscpack files
 HEADERS += $$files($$SRC/*.h)
+DESTDIR = $$PWD
 
 
 MOC_DIR = ./tmpSrc
