@@ -114,7 +114,7 @@ Sensors::Sensors()
 	fDestPoint = IpEndpointName (fDestination.toStdString().c_str(), fPort);
 	try {
 		fSocket = new UdpSocket();
-		if (fSocket) fSocket->allowBroadcast();
+		if (fSocket) fSocket->SetEnableBroadcast(true);
 		fIPNum = Tools::getIP();
 		fIPStr = Tools::ip2string(fIPNum);
 		fTimerID = startTimer(10);
