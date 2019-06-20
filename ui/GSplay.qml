@@ -6,6 +6,17 @@ Image {
 	id: gs
     source: "FondNu.png"
     property bool mode2: false;
+	Text {
+		id: dynName;
+		objectName:  "seqName";
+		anchors.horizontalCenter: gs.horizontalCenter
+		anchors.top: gs.top
+		anchors.topMargin: 30 * pixelRatio()
+		text: " "
+		font.family: "Futura"
+		font.pointSize: 20
+		color: "#00ff7a"
+	}
 
 	function pixelRatio() {
 		return Screen.logicalPixelDensity * 25.4 / 72.
@@ -43,8 +54,8 @@ Image {
 		anchors.right: gs.right
 		anchors.leftMargin: 30 * pixelRatio()
 		anchors.rightMargin: 30 * pixelRatio()
-		GSslider { num: 1; label: "Space"; leftstr:"-"; rightstr: "+"; }
-		GSslider { num: 2; label: "Slider"; leftstr:""; rightstr: ""; }
+		GSslider { num: 1; label: "Space"; leftstr:"-"; rightstr: "+"; objectName:"space"; }
+		GSslider { num: 2; label: " "; leftstr:""; rightstr: ""; objectName:"slider"; }
 	}
 
 	Rectangle {
