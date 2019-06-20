@@ -17,6 +17,9 @@ MOC_DIR = ./tmpSrc
 RCC_DIR = ./tmpSrc
 UI_DIR  = ./tmpSrc
 
+CONFIG += c++11
+
+
 macx {
 	CONFIG+=x86_64
 	DEFINES += TESTMOTOE
@@ -36,7 +39,6 @@ android {
 }
 
 ios {
-	CONFIG += c++11
     QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
 	QMAKE_INFO_PLIST = $$PWD/Info-ios.plist
 	ios_icon.files = $$files($$ROOT/rsrc-ios/ios.iconset/*.png)
