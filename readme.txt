@@ -49,10 +49,16 @@ Messages émis depuis max
 /greensound wait
 /greensound quit				: force l'application cliente à quitter
 /greensound/buttons n n n;		: état des boutons de contrôle (0 | 1)
+/greensound seq n;				: passage à la séquence n
+
 
 ------------------------------------
  Historique des versions
 ------------------------------------
+version 1.14
+- nouveau message '/greensound seq' pour changement de séquence
+- ajout de labels dans les boutons et en en-tête
+
 version 1.13
 - révision de l'interface utilisateur et marche forcée pour android active
 
