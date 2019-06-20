@@ -70,6 +70,7 @@ class SensorAppl : public QApplication
 	bool		fRunning;			// the current application state
 	OSCListener	fListener;			// the OSC input manager
 	bool		fSetButtons;		// a flag to activate the buttons settings
+	int			fSetSeqName = -1;	// a flag (when >=0) and a seq number
 	bool		fButtonsState[3];
 
 	void	setButtonState (QObject * button, bool state);
@@ -83,6 +84,8 @@ class SensorAppl : public QApplication
 		void wait();
 		void play();
 		void setButtons(int b1, int b2, int b3);
+		void setSequence (int n);
+		void sequence(int b1);
 		void greensound();
 		void connect_to(const char* dst)	{ fSensors.connect(dst); }
 		const Sensors* sensors() const		{ return &fSensors; }

@@ -24,6 +24,141 @@ extern const char* kButtonsAddr;
 const float kVersion = 1.14f;
 const char* kVersionStr = "1.14";
 
+
+static const char* sSeqNames[] = {
+	"green_birds", 	"green_birds",
+	"blue_birds", 	"blue_birds",
+	"spanish", 		"spanish",
+	"percussions", 	"percussions",
+	"bells", 		"bells",
+	"coucou", 		"coucou",
+	"fake_insects", "fake_insects",
+	"voice_1", 		"voice_1",
+	"tabla", 		"tabla",
+	"voice_2", 		"voice_2",
+	"new_birds", 	"new_birds",
+	"strings_1", 	"strings_1",
+	"strings_2", 	"strings_2"
+};
+
+static const char* sB1Labels[] = {
+	"type sound",
+	"type sound",
+	"type sound",
+	"type sound",
+	"nb repeat events",
+	"nb repeat events",
+	"type sound",
+	"type sound",
+	"initial pitch",
+	"initial pitch",
+	"type sound",
+	"velocity",
+	"type sound",
+	"pitch",
+	"type sound",
+	"type sound",
+	"type sound",
+	"type sound",
+	"type sound",
+	"type sound",
+	"type sound",
+	"",
+	"pitch",
+	"pitch",
+	"pitch",
+	"pitch"
+};
+
+static const char* sB2Labels[] = {
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"type rythm",
+	"type rythm",
+	"type rythm",
+	"type rythm",
+	"type rythm",
+	"sound duration",
+	"silence duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"sound duration",
+	"",
+	"",
+	"sound duration",
+	"",
+	"",
+	"",
+	"",
+	""
+};
+
+static const char* sB3Labels[] = {
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker",
+	"first loudspeaker",
+	"nb ls repetition",
+	"nb ls repetition",
+	"nb ls repetition",
+	"first loudspeaker",
+	"nb ls repetition",
+	"nb ls repetition",
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker",
+	"",
+	"",
+	"loudspeaker",
+	"",
+	"",
+	"loudspeaker",
+	"",
+	"",
+	"",
+	"",
+	""
+};
+
+
+static const char* sSliderLabels[] = {
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of repeat events",
+	"number of repeat events",
+	"number of repeat events",
+	"number of repeat events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of events",
+	"number of overlay",
+	"number of overlay",
+	"number of overlay",
+	"random",
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker",
+	"loudspeaker"
+};
+
+
 using namespace std;
 
 //------------------------------------------------------------------------
@@ -178,6 +313,35 @@ void SensorAppl::setButtonState (QObject * button, bool state)
 }
 
 //------------------------------------------------------------------------
+void SensorAppl::setSequence (int n)
+{
+	QQuickItem* root = fView.rootObject();
+	QObject * label = root->findChild<QObject*>("seqName");
+	if (label) label->setProperty ("text", sSeqNames[n]);
+
+	QObject * b1 = root->findChild<QObject*>("b1");
+	label = b1->findChild<QObject*>("label");
+	if (label) label->setProperty ("text", sB1Labels[n]);
+
+	QObject * b2 = root->findChild<QObject*>("b2");
+	label = b2->findChild<QObject*>("label");
+	if (label) label->setProperty ("text", sB2Labels[n]);
+
+	QObject * b3 = root->findChild<QObject*>("b3");
+	label = b3->findChild<QObject*>("label");
+	if (label) label->setProperty ("text", sB3Labels[n]);
+	
+	QObject * slider = root->findChild<QObject*>("slider");
+	if (slider) slider->setProperty ("label", sSliderLabels[n]);
+}
+
+//------------------------------------------------------------------------
+void SensorAppl::sequence (int n)
+{
+	if ((n >= 0) && (n < 26)) fSetSeqName = n;
+}
+
+//------------------------------------------------------------------------
 void SensorAppl::timerEvent(QTimerEvent*)
 {
 	static int ntry = 1;
@@ -196,6 +360,10 @@ void SensorAppl::timerEvent(QTimerEvent*)
 			setButtonState (root->findChild<QObject*>("b2"), fButtonsState[1]);
 			setButtonState (root->findChild<QObject*>("b3"), fButtonsState[2]);
 			fSetButtons = false;
+		}
+		if (fSetSeqName >= 0) {
+			setSequence(fSetSeqName);
+			fSetSeqName = -1;
 		}
 	}
 	else if (fSensors.connected() ) {
@@ -239,7 +407,11 @@ void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpoin
 					fAppl->play();
 				else if (msg == "quit")
 					fAppl->quit();
-				
+				else if (msg == "seq") {
+					if (++i != m.ArgumentsEnd() && i->IsInt32()) {
+						fAppl->sequence( i->AsInt32Unchecked() );
+					}
+				}
 			}
 			else if (i->IsInt32()) {
 			}
@@ -247,6 +419,12 @@ void OSCListener::ProcessMessage( const osc::ReceivedMessage& m, const IpEndpoin
 			}
 			i++;
 		}
+	}
+	else if ((address == kButtonsAddr) && (m.ArgumentCount() == 3)) {
+		osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+		osc::int32 b1, b2, b3;
+		args >> b1 >> b2 >> b3;
+		fAppl->setButtons( b1, b2, b3);
 	}
 	else if ((address == kButtonsAddr) && (m.ArgumentCount() == 3)) {
 		osc::ReceivedMessageArgumentStream args = m.ArgumentStream();

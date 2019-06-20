@@ -45,7 +45,6 @@ const char* kModeAddr		= "/mode";
 const char*	kParamBaseAddr	= "/param/";
 const char* kSliderBaseAddr	= "/slider/";
 
-
 //------------------------------------------------------------------------
 void Sensors::timerEvent(QTimerEvent * )
 {
@@ -168,6 +167,9 @@ void Sensors::hello() const
 		p.end();
 		unsigned long dest = broadcastAddress ();
 		fSocket->SendTo(IpEndpointName(dest, fPort), p.Data(), p.Size());
+		IpEndpointName ip (dest, fPort);
+		char buff[256];
+		ip.AddressAsString(buff);
 	}
 }
 
