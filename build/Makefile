@@ -53,7 +53,7 @@ android/Makefile: Greensounds.pro
 	@which $(QMAKEANDROID) || (echo "### you must create an alias named '$(QMAKEANDROID)' that point to qmake inside your qt/android distribution and that is available from your PATH."; false;)
 	make rsrc
 	[ -d android ] || mkdir android
-	cd android && $(QMAKEANDROID) -spec android-g++ ../Greensounds.pro 
+	cd android && $(QMAKEANDROID) -spec android-clang ../Greensounds.pro 
 
 GSAndroid:
 	make rsrc
@@ -61,7 +61,7 @@ GSAndroid:
 	[ -d android/android-build ] || mkdir android/android-build
 	cd android && make INSTALL_ROOT=android-build install
 	cd android && androiddeployqt --input android-libGreensounds.so-deployment-settings.json --output android-build --deployment bundled --gradle $(SIGN)
-	cp android/android-build//build/outputs/apk/android-build-release-signed.apk Greensounds.apk
+	cp android/android-build//build/outputs/apk/release/android-build-release-signed.apk Greensounds.apk
 
 akey: ../rsrc/greensound.keystore
 ../rsrc/greensound.keystore:
