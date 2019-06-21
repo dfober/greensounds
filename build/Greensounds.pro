@@ -39,7 +39,7 @@ android {
 }
 
 ios {
-    QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+    QMAKE_IOS_DEPLOYMENT_TARGET = 10.0
 	QMAKE_INFO_PLIST = $$PWD/Info-ios.plist
 	ios_icon.files = $$files($$ROOT/rsrc-ios/ios.iconset/*.png)
 	QMAKE_BUNDLE_DATA += ios_icon
