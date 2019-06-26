@@ -1,0 +1,96 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16280\viewh11860\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs32 \cf0 Greensounds
+\b0\fs24 \
+\
+\
+
+\b D\'e9finition du Multi KONTAKT 
+\b0 \
+compos\'e9 de 12 programmes (A1 ... A6 et B1 ... B6) de chacun 8 layers (ou groupes) P1, P2, P3, P4, P5sans-oiseaux, P5oiseaux, P6 et P7\
+				\
+=========================================================\
+			\
+Nom Layer (et type de sons et valeurs des hauteurs MIDI):\
+							\
+P1	Guiro	Percu	PercuCastagnet	Riviere  --------> -3db	21-68	69-96	97-125	        		126-127			\
+P2	Triangle tenu	Insectes faux	Riviere	---------> -6db -------> les sons "triangle" ont \'e9t\'e9 remplac\'e9 par "bol japonais" le 28 03 2015	21-83	        84-125	        126-127	\
+			\
+P3	Tenu nuit		Tenu jour		Insect/ oiseau	Riviere  --------> -12db	21-38	        39-68	        69-78/79-125	126-127			\
+P4	Voix		Cecilia2    ---------> -6db					\
+	21-50	51-125			\
+		\
+P5sans-oiseaux	Voix		Tenu jour court -------> -6db	  \
+				21-50	51-68\
+	          \
+P5oiseaux		        Insect/ oiseau	  --------> -9db			\
+        				69-78/79-125		\
+		\
+P6	Celli   	Violons    -------> -6db						36-54   	55-96	\
+\
+P7	Fond    	NewOiseaux -------> -12db\
+        	12-14   	24-83\
+					\
+=========================================================\
+\
+6 programmes A (canal MIDI de 1 \'e0 6) de chacun 8 layers.\
+On passe d'un layer \'e0 l'autre par l'envoi d'un ctrl-change 9 de valeurs 1 \'e0 7\
+				\
+ProgA1:	\
+						\
+layer	    		 Contrl n\'b09	Port  Canal		\
+P1	        			1	        A	1					\
+P2	        			2	        A	1	\
+P3	       			3	        A	1	\
+P4	        			4	        A	1	\
+P5oiseaux			5	        A	1\
+P5sans-oiseaux	5	        A	1		\
+P6	        			6	        A	1\
+P7	        			7	        A	1\
+		\
+ProgA2 --> ProgA6 (idem A1)	\
+		\
+\
+=========================================================	\
+6 programmes B (canal MIDI de 7 \'e0 12) de chacun 8 layers\
+On passe d'un layer \'e0 l'autre par l'envoi d'un ctrl-change 9 de valeurs 1 \'e0 7\
+		\
+ProgB1:	\
+			\
+layer	    		 Contrl n\'b09	Port  Canal		\
+P1	        			1	        A	7					\
+P2	        			2	        A	7	\
+P3	        			3	        A	7	\
+P4	        			4	        A	7	\
+P5oiseaux			5	        A	7\
+P5sans-oiseaux	5	        A	7		\
+P6	        			6	        A	7\
+P7	        			7	        A	7						\
+\
+ProgB2 --> ProgB6 (idem B1)\
+\
+=========================================================\
+\
+Adressage des layers (ou groupes) par la fonction:       PLACE-PROG (date ,  M-xx ,  *out*)\
+Suivant les valeurs M-xx ci-dessous pass\'e9es \'e0 la fonction, pour respectivement les programmes A et B on active les layers:  \
+			\
+Nom	LayerA   LayerB	\
+				\
+M1		P1	P2	\
+M2		P1	P3	\
+M3		P1	P4	\
+M4		P2	P3	\
+M5		P2	P4	\
+M6		P3	P4	\
+M7		P1	P5	\
+M8		P2	P5	\
+M9		P6	P6\
+M10     	P6    P3 \
+M11     	P6    P7\
+				\
+La fonction PLACE_PROG activer les LAYERS par un envoit \'e0 KONTAKT du controleur n\'b09 avec des valeurs de 1 \'e0 7 suivant le n\'b0 de LAYER \'e0 activer		\
+=========================================================}
