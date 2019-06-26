@@ -56,11 +56,11 @@ void Sensors::timerEvent(QTimerEvent * )
 			OSCStream osc;
 			osc.start( fSensor->address());
 			for (int i=0; i<count; i++)
-#ifdef ANDROID
-				osc << -fSensor->value(i);
-#else
+//#ifdef ANDROID
+//				osc << -fSensor->value(i);
+//#else
 				osc << fSensor->value(i);
-#endif
+//#endif
 			osc.end();
 			fSocket->SendTo(fDestPoint, osc.Data(), osc.Size());
 		}
