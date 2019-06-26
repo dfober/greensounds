@@ -338,7 +338,8 @@ void SensorAppl::setSequence (int n)
 //------------------------------------------------------------------------
 void SensorAppl::sequence (int n)
 {
-	if ((n >= 0) && (n < 26)) fSetSeqName = n;
+//	if ((n >= 0) && (n < 26)) fSetSeqName = n;
+	if ((n > 0) && (n <= 26)) fSetSeqName = n-1;
 }
 
 //------------------------------------------------------------------------
