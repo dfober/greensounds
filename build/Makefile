@@ -1,6 +1,7 @@
 
 .PHONY : macos ios android
 
+PROJ 			:= Greensounds2
 QMAKE 			?= qmake
 QMAKEIOS 		?= qmake-ios
 QMAKEANDROID 	?= qmake-android
@@ -12,14 +13,14 @@ QML := ../ui
 #===============================================================
 macos: macos/greensounds.xcodeproj GSMac
 
-macos/greensounds.xcodeproj: Greensounds.pro
+macos/greensounds.xcodeproj: $(PROJ).pro
 	[ -d macos ] || mkdir macos
-	cd macos && $(QMAKE) -spec macx-xcode ../Greensounds.pro 
+	cd macos && $(QMAKE) -spec macx-xcode ../$(PROJ).pro
 
 GSMac:
 	cp -rf $(QML) $(RSC)
 	make rsrc
-	xcodebuild -jobs 8 -project macos/greensounds.xcodeproj -target Greensounds -configuration Release
+	xcodebuild -jobs 8 -project macos/$(PROJ).xcodeproj -target $(PROJ) -configuration Release
 
 rsrc:
 	-[ -d $(RSC) ] && rm -rf $(RSC)
@@ -30,17 +31,17 @@ rsrc:
 #===============================================================
 # building Greensounds for iOS
 #===============================================================
-ios: ios/greensounds.xcodeproj GSiOS
+ios: ios/$(PROJ).xcodeproj GSiOS
 
-ios/greensounds.xcodeproj: Greensounds.pro 
+ios/$(PROJ).xcodeproj: $(PROJ).pro 
 	@which $(QMAKEIOS) || (echo "### you must create an alias named '$(QMAKEIOS)' that point to qmake inside your qt/ios distribution and that is available from your PATH."; false;)
 	make rsrc
 	[ -d ios ] || mkdir ios
-	cd ios && $(QMAKEIOS) ../Greensounds.pro 
+	cd ios && $(QMAKEIOS) ../$(PROJ).pro 
 
 GSiOS:
 	make rsrc
-	xcodebuild -jobs 8 -project ios/greensounds.xcodeproj -target Greensounds -configuration Release
+	xcodebuild -jobs 8 -project ios/$(PROJ).xcodeproj -target $(PROJ) -configuration Release
 
 #===============================================================
 # building Greensounds for Android
@@ -49,19 +50,19 @@ SIGN=--sign ../../Greensounds/greensound.keystore grame-greensounds  --storepass
 
 android: android/Makefile GSAndroid
 
-android/Makefile: Greensounds.pro  
+android/Makefile: $(PROJ).pro  
 	@which $(QMAKEANDROID) || (echo "### you must create an alias named '$(QMAKEANDROID)' that point to qmake inside your qt/android distribution and that is available from your PATH."; false;)
 	make rsrc
 	[ -d android ] || mkdir android
-	cd android && $(QMAKEANDROID) -spec android-clang ../Greensounds.pro 
+	cd android && $(QMAKEANDROID) -spec android-clang ../$(PROJ).pro 
 
 GSAndroid:
 	make rsrc
 	make -j 4 -C android -f Makefile
 	[ -d android/android-build ] || mkdir android/android-build
 	cd android && make INSTALL_ROOT=android-build install
-	cd android && androiddeployqt --input android-libGreensounds.so-deployment-settings.json --output android-build --deployment bundled --gradle $(SIGN)
-	cp android/android-build//build/outputs/apk/release/android-build-release-signed.apk Greensounds.apk
+	cd android && androiddeployqt --input android-lib$(PROJ).so-deployment-settings.json --output android-build --deployment bundled --gradle $(SIGN)
+	cp android/android-build//build/outputs/apk/release/android-build-release-signed.apk $(PROJ).apk
 
 akey: ../rsrc/greensound.keystore
 ../rsrc/greensound.keystore:
