@@ -1,7 +1,8 @@
 
 
 VERSION := 1.14
-PACKAGE := Greensounds-$(VERSION)
+NAME    := Greensounds2
+PACKAGE := $(NAME)-$(VERSION)
 
 ANDROIDDIR := ../build
 IOSDIR := ../build/ios
@@ -10,7 +11,7 @@ all:
 	[ -d $(PACKAGE) ] || mkdir $(PACKAGE)
 	make common
 	make android
-	make ios
+#	make ios
 #	tar czf $(PACKAGE).tgz $(PACKAGE)
 
 common:
@@ -18,7 +19,7 @@ common:
 	cp ../readme.txt $(PACKAGE)
 
 android:
-	cp $(ANDROIDDIR)/Greensounds.apk $(PACKAGE)/$(PACKAGE).apk
+	cp $(ANDROIDDIR)/$(NAME).apk $(PACKAGE)/$(PACKAGE).apk
 
 ios:
-	cp -rf $(IOSDIR)/Release-iphoneos/Greensounds.app $(PACKAGE)/$(PACKAGE).app
+	cp -rf $(IOSDIR)/Release-iphoneos/$(NAME).app $(PACKAGE)/$(PACKAGE).app
