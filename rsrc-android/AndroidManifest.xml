@@ -2,12 +2,12 @@
 <manifest package="fr.grame.greensounds2" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.14" android:versionCode="12" android:installLocation="auto">
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Greensounds2" android:icon="@drawable/icon" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:enabled="true">
 		<receiver  android:name=".WifiReceiver" android:enabled="true" > </receiver>
-        <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="Greensounds" android:screenOrientation="portrait" android:launchMode="singleInstance">
+        <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="Greensounds2" android:screenOrientation="portrait" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <meta-data android:name="android.app.lib_name" android:value="Greensounds"/>
+            <meta-data android:name="android.app.lib_name" android:value="Greensounds2"/>
             <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
             <meta-data android:name="android.app.repository" android:value="default"/>
             <meta-data android:name="android.app.qt_libs_resource_id" android:resource="@array/qt_libs"/>
